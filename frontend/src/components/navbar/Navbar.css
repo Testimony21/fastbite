@@ -1,0 +1,271 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+/* --- Home Navbar --- */
+.navbar.home {
+  background: transparent;
+}
+
+.navbar.home .logo {
+  color: white;
+}
+
+.navbar.home .nav-links li a,
+.navbar.home .menu-icon {
+  color: white;
+  font-weight: 500;
+  padding: 10px 8px;
+  text-decoration: none;
+}
+
+.navbar.home.scrolled {
+  background: white;
+}
+
+.navbar.home.scrolled .logo {
+  color: #ff5a00;
+}
+
+.navbar.home.scrolled .nav-links li a,
+.navbar.home.scrolled .menu-icon {
+  color: #333;
+}
+
+.navbar.home .nav-links li a:hover {
+  text-decoration: underline;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #ff5a00;
+}
+
+/* --- Corporate Navbar --- */
+.navbar.corporate .logo {
+  color: white;
+}
+
+.navbar.corporate .nav-links li a,
+.navbar.corporate .menu-icon {
+  color: white;
+  font-weight: 500;
+  font-size: medium;
+  padding: 10px 2px;
+  text-decoration: none;
+}
+
+.navbar.corporate.scrolled {
+  background-color: white;
+}
+
+.navbar.corporate.scrolled .logo {
+  color: #ff5a00;
+}
+
+.navbar.corporate.scrolled .nav-links li a,
+.navbar.corporate.scrolled .menu-icon {
+  color: #333;
+}
+
+.navbar.corporate.scrolled .search-food {
+  border: 1px solid #f2f2f2;
+  padding: 7px 15px;
+}
+
+.navbar.corporate.scrolled .search-food:hover {
+  background-color: #f2f2f2;
+  color: white;
+}
+
+.navbar.corporate.scrolled .login {
+  background-color: #f2f2f2;
+  padding: 7px 15px;
+}
+
+/* Partner page navbar style */
+.partner-navbar .logo-link {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff5a00;
+  text-decoration: none;
+}
+
+.navbar.partner {
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar.partner .nav-links {
+  gap: 15px;
+}
+
+.navbar.partner .nav-links a {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.navbar.partner .nav-links a:first-child {
+  border: 1px solid #ff5a00;
+  color: #ff5a00;
+  background: white;
+}
+
+.navbar.partner .nav-links a:last-child {
+  background: #ff5a00;
+  color: #333;
+  border: none;
+}
+
+/* 🔹 Minimal navbar (login + forgot-password) */
+.navbar.minimal {
+  justify-content: left;
+  padding: 1rem 2.5%;
+  box-shadow: none;
+  background: #fff;
+}
+
+.navbar.minimal .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ff5a00; 
+  text-decoration: none;
+
+}
+
+.navbar.minimal .nav-links {
+  display: none;
+}
+
+.navbar.become {
+  background: transparent; 
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.become .logo {
+  color: white; 
+}
+
+.navbar.become .nav-links li a {
+  color: white;
+  font-weight: 500;
+  padding: 10px 12px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar.become .nav-links li a:hover {
+  text-decoration: underline;
+  color: #ff5a00;
+}
+
+.navbar.become.scrolled {
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar.become.scrolled .logo {
+  color: #ff5a00;
+}
+
+.navbar.become.scrolled .nav-links li a {
+  color: #333;
+}
+
+.navbar.become.scrolled .nav-links li a:hover {
+  color: #ff5a00;
+}
+
+.motorcycle-icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* ✅ Small screens */
+@media screen and (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    color: inherit;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    /* background: white; */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 999;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+}
+
+/* Mobile responsiveness for navbar */
+@media (max-width: 768px) {
+  .navbar.become .nav-links {
+    display: none; /* hide nav links by default */
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* adjust based on navbar height */
+    right: 0;
+    background: white; /* or rgba(0,0,0,0.9) if you want dark menu */
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .navbar.become .nav-links.active {
+    display: flex; /* show nav links when menu is toggled */
+  }
+
+  .navbar.become .nav-links li {
+    margin: 10px 0;
+  }
+
+  .menu-icon {
+    display: block; /* show hamburger menu */
+    color: white; /* default when navbar is transparent */
+    z-index: 1000;
+  }
+
+  .navbar.become.scrolled .menu-icon {
+    color: #333; /* change icon color when scrolled */
+  }
+}

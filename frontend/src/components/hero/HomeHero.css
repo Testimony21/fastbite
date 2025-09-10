@@ -1,0 +1,177 @@
+.hero {
+  height: 100vh;
+  background: url('../../assets/Images/fastbite3.jpg') center/cover no-repeat;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  text-align: left;
+  padding-left: 50px;
+}
+
+.hero-content h1 {
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+.hero-content h2 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.location-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px;
+}
+
+.location-input input {
+  padding: 12px 12px 12px 40px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #555;
+}
+
+.order-type {
+  position: relative;
+  width: 200px;
+}
+
+.order-type select {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  appearance: none;
+  cursor: pointer;
+  background-color: white;
+  color: #333;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #555;
+}
+
+.search-btn {
+  padding: 12px 20px;
+  background-color: #ff5a00;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+}
+
+input,
+select,
+textarea,
+button {
+  border: none;
+  outline: none;
+}
+
+
+/* Tablet screens (portrait/landscape) */
+@media screen and (max-width: 1024px) {
+  .hero {
+    padding-left: 30px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-content h1 {
+    font-size: 44px;
+  }
+
+  .hero-content h2 {
+    font-size: 20px;
+  }
+
+  .search-container {
+    justify-content: center;
+  }
+}
+
+/* Mobile devices (phones ≤ 768px) */
+@media screen and (max-width: 768px) {
+  .hero {
+    padding-left: 20px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero-content h2 {
+    font-size: 18px;
+  }
+
+  .location-input,
+  .order-type {
+    width: 100%;
+  }
+
+  .search-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Very small phones (≤ 480px) */
+@media screen and (max-width: 480px) {
+  .hero {
+    padding: 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 26px;
+  }
+
+  .hero-content h2 {
+    font-size: 16px;
+  }
+
+  .search-container {
+    gap: 10px;
+  }
+
+  .location-input input,
+  .order-type select {
+    font-size: 14px;
+    padding: 10px 10px 10px 35px;
+  }
+
+  .search-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

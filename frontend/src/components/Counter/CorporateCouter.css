@@ -1,0 +1,36 @@
+/* StatsSection.css */
+.stats-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 0.2rem;
+  background: white;
+  flex-wrap: wrap; /* mobile friendly */
+}
+
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 200px;
+}
+
+.stat-icon {
+  font-size: 4rem;
+  color: #ff6b35; /* adjust to your theme */
+  margin-bottom: 0.5rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-text {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.25rem;
+}

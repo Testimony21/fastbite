@@ -1,0 +1,31 @@
+.partner-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #333; /* dark background */
+  color: #fff;
+  font-size: 14px;
+}
+
+.partner-footer-left a {
+  margin-right: 20px;
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.partner-footer-left a:hover {
+  color: #fff;
+}
+
+.partner-footer-right a {
+  margin-left: 15px;
+  font-size: 18px;
+  color: #bbb;
+  transition: color 0.3s;
+}
+
+.partner-footer-right a:hover {
+  color: #fff;
+}
