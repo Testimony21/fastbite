@@ -1,0 +1,148 @@
+.become-hero {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+  padding: 0 3.8%;
+}
+
+.become-content {
+  color: #fff;
+  max-width: 450px;   
+  text-align: left;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s ease;
+}
+
+.become-content.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.become-content h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.become-content p {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.apply-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ff5a00;
+  border: none;
+  padding: 12px 24px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.apply-btn:hover {
+  background: #ff5a00cc;
+}
+
+.motorcycle-icon {
+  font-size: 1.3rem;
+}
+
+
+/* Tablet screens */
+@media (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .become-content h1 {
+    font-size: 3rem;
+  }
+
+  .become-content p {
+    font-size: 1.5rem;
+  }
+
+  .apply-btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 768px) {
+  .become-hero {
+    justify-content: center; 
+    text-align: center;
+  }
+
+  .hero-overlay {
+    justify-content: center;
+    padding: 0 8%;
+  }
+
+  .become-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .become-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .become-content p {
+    font-size: 1.2rem;
+  }
+
+  .apply-btn {
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .motorcycle-icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .become-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .become-content p {
+    font-size: 1rem;
+  }
+
+  .apply-btn {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+
+  .motorcycle-icon {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,189 @@
+.why-deliver { 
+  padding: 3rem 3.3rem; 
+  background: #fff; 
+  text-align: center; 
+}
+
+.why-deliver h2 { 
+  font-size: 2rem; 
+  margin-bottom: 2rem; 
+  color: #333;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1.25rem;
+  justify-items: center; 
+}
+
+.flip-card {
+  width: 100%;
+  max-width: 250px; 
+  height: 250px;
+  perspective: 1000px;
+}
+
+.features-grid .flip-card:nth-child(5) {
+  grid-column: 2;
+}
+
+.features-grid .flip-card:nth-child(6) {
+  grid-column: 3;
+}
+
+
+.flip-card-inner {
+  position: relative; 
+  width: 100%; 
+  height: 100%;
+  transform-style: preserve-3d; 
+  transition: transform 600ms;
+  will-change: transform;
+}
+
+.flip-card-inner.flipped { 
+  transform: rotateY(180deg); 
+}
+
+.flip-card-face {
+  position: absolute; 
+  inset: 0;
+  display: grid; 
+  grid-template-rows: 1fr auto auto; 
+  border-radius: 14px; 
+  padding: 18px; 
+  backface-visibility: hidden;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+}
+
+.flip-card-front {
+  background: #f6f7f9; 
+  color: #263238;
+}
+
+.flip-card-front .icon { 
+  font-size: 80px; 
+  color: #f97316; 
+  justify-self: start; 
+}
+
+.flip-card-front h3 { 
+  margin: 10px 0 0; 
+  font-size: 1.05rem; 
+  font-weight: 700; 
+  justify-self: start; 
+}
+
+.flip-card-back {
+  background: #ffffff; 
+  color: #374151; 
+  transform: rotateY(180deg);
+}
+
+.flip-card-back p { 
+  margin: 0; 
+  text-align: left; 
+  line-height: 1.45; 
+}
+
+.dots {
+  justify-self: end; 
+  align-self: end;
+  width: 36px; 
+  height: 36px; 
+  border: 0; 
+  border-radius: 999px;
+  background: #eceff3; 
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.04);
+  display: grid; 
+  place-items: center; 
+  cursor: pointer;
+}
+
+.dots svg { 
+  font-size: 20px; 
+}
+
+.flip-card-front .dot-vertical { 
+  display: none; 
+}
+
+.flip-card-front .dots:hover .dot-horizontal { 
+  display: none; 
+}
+
+.flip-card-front .dots:hover .dot-vertical { 
+  display: inline-block; 
+}
+
+.flip-card-back .dot-horizontal { 
+  display: none; 
+}
+
+.flip-card-back .dot-vertical { 
+  display: inline-block; 
+}
+
+.dots:hover { 
+  filter: brightness(0.97); 
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.why-deliver h2,
+.features-grid .flip-card {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+/* animate when class is added */
+.why-deliver h2.animate,
+.features-grid .flip-card.animate {
+  animation: slideUpFade 0.8s ease forwards;
+}
+
+/* Tablet screens */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+
+  /* reset manual positioning for 5th & 6th cards */
+  .features-grid .flip-card:nth-child(5),
+  .features-grid .flip-card:nth-child(6) {
+    grid-column: auto;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 600px) {
+  .why-deliver {
+    padding: 2rem 1.5rem;
+  }
+
+  .why-deliver h2 {
+    font-size: 1.5rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+  }
+
+  .flip-card {
+    max-width: 100%; 
+    height: auto;   
+    min-height: 220px;
+  }
+}
+
