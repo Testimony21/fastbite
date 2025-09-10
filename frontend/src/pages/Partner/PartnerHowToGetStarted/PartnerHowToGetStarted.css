@@ -1,0 +1,56 @@
+.how-to-get-started {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 3rem;
+}
+
+.how-to-get-started .image-section {
+  flex: 1;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.how-to-get-started .image-section img {
+  max-width: 100%;
+  height: 465px;
+  border-radius: 12px;
+}
+
+.how-to-get-started .text-section {
+  flex: 1;
+}
+
+.how-to-get-started h1 {
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.how-to-get-started .step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.how-to-get-started .step-icon {
+  font-size: 1.5rem;
+  color: #ff5a00; /* accent color */
+  margin-top: 2px;
+}
+
+.how-to-get-started h5 {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: left;
+}
+
+.how-to-get-started p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  text-align: left;
+}
+

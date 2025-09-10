@@ -1,0 +1,43 @@
+.partner-why-fastbite {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #fff; /* optional */
+}
+
+.partner-why-fastbite h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.benefits {
+  display: flex;
+  justify-content: center; /* centers items horizontally */
+  gap: 4rem; /* space between items */
+  flex-wrap: wrap; /* allows them to stack on smaller screens */
+}
+
+.benefit-item {
+  flex: 1 1 300px; /* makes each item flexible */
+  max-width: 376px; /* controls width so they don’t stretch too much */
+  text-align: center;
+}
+
+.benefit-item img {
+  width: 100%;
+  max-width: 376px;
+  height: auto;
+  margin: 0 auto 1rem;
+  border-radius: 12px; /* optional rounded corners */
+}
+
+.benefit-item h3 {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.benefit-item p {
+  font-size: 1rem;
+  color: #555;
+}

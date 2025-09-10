@@ -1,0 +1,68 @@
+.partner-get-with-us {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3rem 2.6rem;
+  gap: 2rem;
+}
+
+.partner-get-with-us .left {
+  flex: 1;
+}
+
+.partner-get-with-us .left h1 {
+  font-size: 2rem;
+  margin: 0rem 0rem 2rem 0rem;
+  text-align: left;
+  color: #333;
+}
+
+.partner-get-with-us ul {
+  list-style: none;
+  padding: 0;
+  margin: 0rem 0rem 2rem 0rem;
+  line-height: 30px;
+}
+
+.partner-get-with-us li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.partner-get-with-us li .icon {
+  margin-right: 10px;
+  color: #ff5a00; /* FastBite accent color */
+  font-size: 1.2rem;
+}
+
+.get-started-btn {
+  background-color: #ff5a00;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.get-started-btn:hover {
+  background-color: #e04444;
+}
+
+.partner-get-with-us .right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.partner-get-with-us .right img {
+  max-width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  height: auto;
+}
+

@@ -1,0 +1,141 @@
+.auth-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-navbar {
+  padding: 15px 30px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: fixed;
+}
+
+.auth-navbar .logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff5a00;
+  text-decoration: none;
+}
+
+.auth-container {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 60px);
+}
+
+.auth-image {
+  flex: 1;
+  overflow: hidden;
+}
+
+.auth-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  background: #f9f9f9;
+}
+
+.auth-form h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: #333;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form input {
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.auth-form .btn {
+  background: #ff5a00;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.auth-form h4 {
+  margin-top: 15px;
+  font-size: 24px;
+  color: #333;
+}
+
+.divider {
+  color: #333;
+}
+
+/* .link-btn {
+  background: #ff5a00;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 50px;
+  text-decoration: none;
+  padding: 15px;
+  width: fit-content;
+  justify-content: left;
+} */
+
+.login-btn {
+  width: fit-content;
+  border-radius: 50px;
+  background-color: #ff5a00;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.create-account-btn{
+  width: fit-content;
+  border-radius: 50px;
+  border: 1px solid #333;
+  background-color: white;
+  padding: 15px;
+  font-weight: bolder;
+  text-decoration: none;
+  color: #333;
+}
+
+.forgot-password {
+  text-align: right;
+  margin: 5px 200px 30px;
+}
+
+.password {
+  font-size: 0.9rem;
+  color: #333; /* or your brand color */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.forgot-password .link-btn:hover {
+  color: #ff5a00;
+  text-decoration: underline;
+}
+
+.auth-form hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}

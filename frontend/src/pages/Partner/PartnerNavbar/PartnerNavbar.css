@@ -1,0 +1,64 @@
+.partner-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-navbar.scrolled {
+  background: white; /* White background on scroll */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo-link {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.login-btn,
+.get-started-btn {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  border-radius: 50px;
+  /* text-decoration: none; */
+}
+
+.login-btn {
+  background: #ff5a00;
+  color: white;
+  gap: 5px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.get-started-btn {
+  background: #ff5a00;
+  color: white;
+  padding: 10px;
+}
+
+.user-icon {
+  font-size: 1rem;
+  
+}
