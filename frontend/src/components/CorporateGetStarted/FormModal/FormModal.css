@@ -65,7 +65,7 @@
 }
 
 .submit-btn {
-  background: #007bff;
+  background: #ff5a00;
   color: white;
   padding: 0.7rem;
   border: none;
@@ -77,13 +77,13 @@
 }
 
 .submit-btn:hover {
-  background: #2279d6;
+  background: #ff5a00;
 }
 
 .modal-bottom-link {
   display: block;
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #007bff;
+  color: #ff5a00;
 }
 

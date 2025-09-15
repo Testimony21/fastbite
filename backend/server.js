@@ -11,7 +11,8 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
-connectDB(process.env.MONGO_URI);
+console.log("Connecting to:", process.env.MONGODB_URI);
+connectDB(process.env.MONGODB_URI);
 
 // const express = require("express");
 const app = express();
@@ -19,7 +20,7 @@ const app = express();
 // ✅ Allow multiple origins (localhost + 127.0.0.1)
 const allowedOrigins = [
   "http://localhost:5173",   
-  // "http://localhost:5000"
+  "http://localhost:5000"
 ];
 
 app.use(

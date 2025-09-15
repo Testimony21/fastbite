@@ -28,8 +28,8 @@
   gap: 1rem;
 }
 
-.login-btn,
-.get-started-btn {
+
+.get-started-btn, .login-btn{
   display: flex;
   align-items: center;
   gap: 35px;
@@ -38,17 +38,15 @@
   font-size: 18px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
   font-weight: bold;
-  border-radius: 50px;
-  /* text-decoration: none; */
+  border-radius: 20px;
 }
 
 .login-btn {
   background: #ff5a00;
   color: white;
   gap: 5px;
-  padding: 10px;
+  padding: 0;
   text-decoration: none;
 }
 

@@ -46,12 +46,12 @@
 }
 
 .form-textarea:focus {
-  border-color: #007bff;
+  border-color: #ff5a00;
   outline: none;
 }
 
 .form-right button {
-  background-color: #007bff;
+  background-color: #ff5a00;
   color: #fff;
   border: none;
   padding: 0.9rem 1.5rem;
@@ -63,7 +63,7 @@
 }
 
 .form-right button:hover {
-  background-color: #0056b3;
+  background-color: #ff5a00;
 }
 
 /* Mobile view */

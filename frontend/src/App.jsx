@@ -31,7 +31,8 @@ import BecomeQuestions from './pages/BecomeACourier/BecomeQuestions/BecomeQuesti
 import UploadForm from './pages/Partner/UploadForm/UploadForm';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AppContent() {
   const location = useLocation();
@@ -85,6 +86,8 @@ function AppContent() {
       {renderFooter()}
 
       <BackToTop />
+
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

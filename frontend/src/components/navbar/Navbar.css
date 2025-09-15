@@ -61,7 +61,7 @@
   text-decoration: underline;
   font-weight: 500;
   transition: background-color 0.3s ease, color 0.3s ease;
-  color: #ff5a00;
+  color: #333;
 }
 
 /* --- Corporate Navbar --- */
@@ -107,7 +107,7 @@
 }
 
 /* Partner page navbar style */
-.partner-navbar .logo-link {
+/* .partner-navbar .logo-link {
   font-size: 1.5rem;
   font-weight: bold;
   color: #ff5a00;
@@ -139,7 +139,7 @@
   background: #ff5a00;
   color: #333;
   border: none;
-}
+} */
 
 /* 🔹 Minimal navbar (login + forgot-password) */
 .navbar.minimal {
@@ -180,7 +180,7 @@
 
 .navbar.become .nav-links li a:hover {
   text-decoration: underline;
-  color: #ff5a00;
+  color: #000;
 }
 
 .navbar.become.scrolled {

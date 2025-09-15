@@ -5,23 +5,20 @@ import HowToOrder from "../../components/HowToOrder/HowToOrder"; // fixed import
 import CorporateTestimonials from "../../components/CorporateTestimonials/CorporateTestimonials";
 import Counter from "../../components/Counter/CorporateCounter";
 import CorporateGetStarted from "../../components/CorporateGetStarted/CorporateGetStarted";
+import axios from "axios";
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
 
   const handleSearch = async (location) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/restaurants?location=${location}`);
-      const data = await res.json();
-
-      if (!res.ok) {
-        console.error("Error:", data.message || "Failed to fetch");
-        return;
-      }
+      const { data } = await axios.get(`http://localhost:5000/api/restaurants`, {
+        params: { location },
+      });
 
       setRestaurants(data);
     } catch (err) {
-      console.error("Error fetching restaurants:", err);
+      console.error("Error fetching restaurants:", err.response?.data || err.message);
     }
   };
 

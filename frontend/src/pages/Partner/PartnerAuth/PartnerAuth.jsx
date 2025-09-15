@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./PartnerAuth.css";
 import sampleImage from "../../../assets/Images/fastbite-image2.jpg";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function PartnerAuth() {
   const location = useLocation();
@@ -18,7 +19,7 @@ export default function PartnerAuth() {
   });
   const [error, setError] = useState("");
 
-  const API_URL = import.meta.env.VITE_API_URL; // Use environment variable
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     setIsLogin(location.pathname === "/login");
@@ -32,45 +33,49 @@ export default function PartnerAuth() {
     e.preventDefault();
     setError("");
 
-    // Validate confirm password for signup
+    // validate password match on signup
     if (!isLogin && form.password !== form.confirmPassword) {
       setError("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
-    const formData = {
-      name: form.name,
+    // build request body
+    let formData = {
       email: form.email,
       password: form.password,
-      role: isLogin ? undefined : form.role, // Only set role on signup
     };
 
+    if (!isLogin) {
+      formData = {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        role: form.role,
+      };
+    }
+
     try {
-      const url = isLogin
-        ? `${API_URL}/api/auth/login`
-        : `${API_URL}/api/auth/signup`;
+      const endpoint = isLogin ? "login" : "signup";
+      const { data } = await axios.post(`${API_URL}/api/auth/${endpoint}`, formData);
 
-      const { data } = await axios.post(url, formData, {
-        headers: { "Content-Type": "application/json" },
-      });
-
+      // store user data
       localStorage.setItem("userInfo", JSON.stringify(data));
+      toast.success(isLogin ? "Login successful!" : "Account created successfully!");
 
-      // Redirect based on role
+      // redirect based on role
       if (data.role === "restaurant") {
         navigate("/partner-with-us");
       } else {
         navigate("/");
       }
     } catch (err) {
-      console.error("Error:", err);
-      setError(
-        err.response?.data?.message ||
-          err.message ||
-          "Something went wrong"
-      );
-    }
-  };
+      console.error("Login/Signup error:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "Server error, please try again");
+
+      toast.error(errorMessage);
+  }
+};
 
   return (
     <div className="auth-page">

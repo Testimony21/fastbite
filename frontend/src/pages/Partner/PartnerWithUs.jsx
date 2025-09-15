@@ -2,18 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./PartnerWithUs.css";
 import { Link } from "react-router-dom";
 import { FaRegBuilding } from "react-icons/fa";
-// import PartnerNavbar from "./PartnerNavbar/PartnerNavbar";
 import PartnerWhyFastBite from './PartnerWhyFastBite/PartnerWhyFastBite';
 import HeroImage from "../../assets/Images/fastbite-image1.jpg";
 import PartnerGetWithUs from "./PartnerGetWithUs/PartnerGetWithUs";
 import PartnerHowToGetStarted from "./PartnerHowToGetStarted/PartnerHowToGetStarted";
 import PartnerReview from "./PartnerReview/PartnerReview";
 import PartnerFaq from "./PartnerFaq/PartnerFaq"; // Import the CSS for FAQ section
-// import PartnerFooter from "./PartnerFooter/PartnerFooter"; 
-// import PartnerAuth from "./PartnerAuth/PartnerAuth";
-// import PartnerForgotPassword from "./PartnerAuth/PartnerForgotPassword/PartnerForgotPassword";
-import UploadForm from "./UploadForm/UploadForm";
-import Dashboard from "../Dashboard/Dashboard";
+
 
 const PartnerWithUs = () => {
   const firstPart = "The missing ingredient";
@@ -78,8 +73,6 @@ const PartnerWithUs = () => {
       <PartnerHowToGetStarted />
       <PartnerReview />
       <PartnerFaq />
-      <UploadForm />
-      <Dashboard />
     </>
   );
 };
