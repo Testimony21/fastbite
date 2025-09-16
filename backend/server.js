@@ -20,7 +20,9 @@ const app = express();
 // ✅ Allow multiple origins (localhost + 127.0.0.1)
 const allowedOrigins = [
   "http://localhost:5173",   
-  "http://localhost:5000"
+  "http://localhost:5000",
+  "https://fastbite-lvkj.onrender.com",
+  "https://fastbiteapp.netlify.app"
 ];
 
 app.use(
