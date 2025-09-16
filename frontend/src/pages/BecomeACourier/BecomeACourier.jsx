@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaMotorcycle } from "react-icons/fa";
 import courierHero from "../../assets/Images/fastbite-image12.jpg";
-import "./becomeACourier.css";
+import "./BecomeACourier.css";
 import BecomeNavbar from "./BecomeNavbar/BecomeNavbar";
 import BecomeWhyDeliver from "../../pages/BecomeACourier/BecomeWhyDeliver/BecomeWhyDeliver";
 import BecomeRequirements from "../../pages/BecomeACourier/BecomeRequirements/BecomeRequirements";
