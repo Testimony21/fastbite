@@ -70,12 +70,13 @@ export default function PartnerAuth() {
         navigate("/");
       }
     } catch (err) {
+      const errorMessage = err.response?.data?.message || "Server error, please try again";
       console.error("Login/Signup error:", err.response?.data || err.message);
       setError(err.response?.data?.message || "Server error, please try again");
 
       toast.error(errorMessage);
-  }
-};
+    }
+  };
 
   return (
     <div className="auth-page">
