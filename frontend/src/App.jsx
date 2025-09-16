@@ -3,7 +3,7 @@ import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 import HomeHero from './components/hero/HomeHero';
 import HowToOrder from './components/HowToOrder/HowToOrder';
-// import './App.css';
+import './App.css';
 import YourTime from './components/YourTime/YourTime';
 import Footer from './components/Footer/Footer';
 import BackToTop from './components/BackToTop/BackToTop';
