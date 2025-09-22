@@ -2,10 +2,13 @@
   position: relative;
   height: 100vh;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   text-align: center;
+  transition: background-image 1s ease-in-out;
 }
 
 .hero-overlay {
@@ -20,7 +23,7 @@
 
 .become-content {
   color: #fff;
-  max-width: 450px;   
+  max-width: 600px;   
   text-align: left;
   opacity: 0;
   transform: translateY(40px);
@@ -41,12 +44,12 @@
 
 .become-content p {
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 800;
   margin-bottom: 2rem;
   line-height: 1.5;
 }
 
-.apply-btn {
+.apply-now-btn {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -67,6 +70,21 @@
 
 .motorcycle-icon {
   font-size: 1.3rem;
+}
+
+.fade {
+  animation: fadeSlide 1s ease-in-out;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 
