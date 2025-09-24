@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 50px;
+  padding: 0 60px;       
+  height: 70px;   
   position: fixed;
   top: 0;
   left: 0;
@@ -12,22 +13,31 @@
 }
 
 .partner-navbar.scrolled {
-  background: white; /* White background on scroll */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: white; 
+  box-shadow:0 4px 10px #ff5a00;
 }
 
 .logo-link {
   font-size: 24px;
   font-weight: bold;
-  text-decoration: none;
+  display: flex;           
+  align-items: center; 
+  text-decoration: none; 
   color: inherit;
+  line-height: 1;
+  height: 100%;
+  padding-top: 25px;
+}
+
+
+.logo-link.scrolled {
+  color: #ff5a00;
 }
 
 .actions {
   display: flex;
   gap: 1rem;
 }
-
 
 .get-started-btn, .login-btn{
   display: flex;

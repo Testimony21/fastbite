@@ -46,6 +46,7 @@
 
 .navbar.home.scrolled {
   background: white;
+  box-shadow: 0 4px 6px #ff5a00;
 }
 
 .navbar.home.scrolled .logo {
@@ -64,95 +65,18 @@
   color: #333;
 }
 
-/* --- Corporate Navbar --- */
-.navbar.corporate .logo {
-  color: white;
-}
-
-.navbar.corporate .nav-links li a,
-.navbar.corporate .menu-icon {
-  color: white;
-  font-weight: 500;
-  font-size: medium;
-  padding: 10px 2px;
-  text-decoration: none;
-}
-
-.navbar.corporate.scrolled {
-  background-color: white;
-}
-
-.navbar.corporate.scrolled .logo {
-  color: #ff5a00;
-}
-
-.navbar.corporate.scrolled .nav-links li a,
-.navbar.corporate.scrolled .menu-icon {
-  color: #333;
-}
-
-.navbar.corporate.scrolled .search-food {
-  border: 1px solid #f2f2f2;
-  padding: 7px 15px;
-}
-
-.navbar.corporate.scrolled .search-food:hover {
-  background-color: #f2f2f2;
-  color: white;
-}
-
-.navbar.corporate.scrolled .login {
-  background-color: #f2f2f2;
-  padding: 7px 15px;
-}
-
-/* Partner page navbar style */
-/* .partner-navbar .logo-link {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ff5a00;
-  text-decoration: none;
-}
-
-.navbar.partner {
-  background: white;
-  border-bottom: 1px solid #ddd;
-}
-
-.navbar.partner .nav-links {
-  gap: 15px;
-}
-
-.navbar.partner .nav-links a {
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.navbar.partner .nav-links a:first-child {
-  border: 1px solid #ff5a00;
-  color: #ff5a00;
-  background: white;
-}
-
-.navbar.partner .nav-links a:last-child {
-  background: #ff5a00;
-  color: #333;
-  border: none;
-} */
-
 /* 🔹 Minimal navbar (login + forgot-password) */
 .navbar.minimal {
   justify-content: left;
   padding: 1rem 2.5%;
-  box-shadow: none;
+  box-shadow: 0 4px 6px #ff5a00;
   background: #fff;
 }
 
 .navbar.minimal .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #ff5a00; 
+  color: #ff5a00;
   text-decoration: none;
 
 }
@@ -162,12 +86,12 @@
 }
 
 .navbar.become {
-  background: transparent; 
+  background: transparent;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navbar.become .logo {
-  color: white; 
+  color: white;
 }
 
 .navbar.become .nav-links li a {
@@ -185,7 +109,7 @@
 
 .navbar.become.scrolled {
   background: white;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px #ff5a00;
 }
 
 .navbar.become.scrolled .logo {
@@ -227,7 +151,7 @@
     /* background: white; */
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 999;
   }
 
@@ -239,20 +163,24 @@
 /* Mobile responsiveness for navbar */
 @media (max-width: 768px) {
   .navbar.become .nav-links {
-    display: none; /* hide nav links by default */
+    display: none;
+    /* hide nav links by default */
     flex-direction: column;
     position: absolute;
-    top: 60px; /* adjust based on navbar height */
+    top: 60px;
+    /* adjust based on navbar height */
     right: 0;
-    background: white; /* or rgba(0,0,0,0.9) if you want dark menu */
+    background: white;
+    /* or rgba(0,0,0,0.9) if you want dark menu */
     width: 100%;
     text-align: center;
     padding: 15px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .navbar.become .nav-links.active {
-    display: flex; /* show nav links when menu is toggled */
+    display: flex;
+    /* show nav links when menu is toggled */
   }
 
   .navbar.become .nav-links li {
@@ -260,12 +188,15 @@
   }
 
   .menu-icon {
-    display: block; /* show hamburger menu */
-    color: white; /* default when navbar is transparent */
+    display: block;
+    /* show hamburger menu */
+    color: white;
+    /* default when navbar is transparent */
     z-index: 1000;
   }
 
   .navbar.become.scrolled .menu-icon {
-    color: #333; /* change icon color when scrolled */
+    color: #333;
+    /* change icon color when scrolled */
   }
 }

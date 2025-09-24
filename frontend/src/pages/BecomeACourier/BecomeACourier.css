@@ -47,6 +47,8 @@
   font-weight: 800;
   margin-bottom: 2rem;
   line-height: 1.5;
+  color: inherit;
+  max-width: 500px;   
 }
 
 .apply-now-btn {
