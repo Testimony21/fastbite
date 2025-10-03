@@ -3,13 +3,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  padding: 2rem 3rem;
+  padding: 2rem 4rem;
 }
 
 .how-to-get-started .image-section {
   flex: 1;
   display: flex;
-  /* justify-content: center; */
 }
 
 .how-to-get-started .image-section img {
@@ -36,7 +35,7 @@
 
 .how-to-get-started .step-icon {
   font-size: 1.5rem;
-  color: #ff5a00; /* accent color */
+  color: #ff5a00;
   margin-top: 2px;
 }
 

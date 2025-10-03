@@ -1,7 +1,7 @@
 .partner-why-fastbite {
   text-align: center;
-  padding: 4rem 1rem;
-  background: #fff; /* optional */
+  padding: 4rem 3.7rem;
+  background: #fff;
 }
 
 .partner-why-fastbite h2 {
@@ -12,15 +12,15 @@
 
 .benefits {
   display: flex;
-  justify-content: center; /* centers items horizontally */
-  gap: 4rem; /* space between items */
-  flex-wrap: wrap; /* allows them to stack on smaller screens */
+  justify-content: center; 
+  gap: 4rem; 
+  flex-wrap: wrap; 
 }
 
 .benefit-item {
-  flex: 1 1 300px; /* makes each item flexible */
-  max-width: 376px; /* controls width so they don’t stretch too much */
-  text-align: center;
+  flex: 1 1 300px; 
+  max-width: 376px; 
+  text-align:start;
 }
 
 .benefit-item img {

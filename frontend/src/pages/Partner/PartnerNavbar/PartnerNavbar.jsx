@@ -39,28 +39,21 @@ const PartnerNavbar = ({ onGetStartedClick }) => {
         {userInfo?.token ? (
           <>
             <Link to="/partner/dashboard" className="login-btn">
-               Dashboard
+              Dashboard
             </Link>
-        <button className="get-started-btn" onClick={onGetStartedClick}>
-          Get Started
-        </button>
-        <button onClick={handleSignOut} className="login-btn">
+            <button className="login-btn" onClick={onGetStartedClick}>
+              Get Started
+            </button>
+            <button onClick={handleSignOut} className="login-btn">
               Sign Out
             </button>
           </>
         ) : (
-          <button className="login-btn">
-            <Link to = "/login">
-            <FaUser className="user-icon" /> Login
+            <Link to="/login" className="login-btn">
+              <FaUser className="user-icon" /> Login
             </Link>
-          </button>
         )}
 
-        
-        
-        {/* <button onClick={handleSignOut} className="login-btn">
-              Sign Out
-            </button> */}
       </div>
     </nav>
   );

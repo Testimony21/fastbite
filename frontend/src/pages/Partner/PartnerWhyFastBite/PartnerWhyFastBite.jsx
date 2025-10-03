@@ -19,12 +19,12 @@ const PartnerWhyFastBite = () => {
                 <div className="benefit-item">
                     <img src={image2} alt="Grow your customer base" />
                     <h3>Grow your customer base</h3>
-                    <p>Millions of users visit our site every day, so your business can reach more customers than ever. </p>
+                    <p>Millions of users visit our site every day, so your business can reach more customers than ever. This brings your restaurant more sales.</p>
                 </div>
                 <div className="benefit-item">
                     <img src={image3} alt="Value for your business" />
                     <h3>Value for your business</h3>
-                    <p>We’ll promote your business on the app, provide free branding and save your business money on daily essentials and premium brands.</p>
+                    <p>We’ll promote your business on the app, provide free branding and save your business money on daily essentials and brands.</p>
                 </div>
             </div>
         </section>

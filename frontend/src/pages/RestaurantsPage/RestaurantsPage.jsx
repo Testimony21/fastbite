@@ -9,12 +9,12 @@ const RestaurantsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
- const params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
   const location = params.get("location") || "";
 
   useEffect(() => {
 
-  const fetchRestaurants = async () => {
+    const fetchRestaurants = async () => {
       try {
         setLoading(true);
         const res = await fetch(
@@ -34,28 +34,39 @@ const RestaurantsPage = () => {
     if (location) fetchRestaurants();
   }, [location]);
 
-  if (loading) return <p className="text-center">Loading restaurants...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  if (loading) return <p className="loading">Loading restaurants...</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">
+    <div className="restaurants-page">
+      <h1 className="page-title">
         Restaurants in {location || "your area"}
       </h1>
 
       {restaurants.length === 0 ? (
         <p>No restaurants found.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="restaurants-list">
           {restaurants.map((r) => (
-            <li key={r._id} className="border p-4 rounded shadow">
-              <h2 className="text-lg font-semibold">{r.name}</h2>
-              <p>{r.location}</p>
-              <p>Cuisine: {r.cuisine}</p>
-              <p>Rating: ⭐ {r.rating}</p>
+            <li key={r._id} className="restaurant-card">
+              {/* Restaurant Image */}
+              {r.image && (
+                <img
+                  src={r.image}
+                  alt={r.name}
+                  className="restaurant-img"
+                />
+              )}
+
+              {/* Restaurant Info */}
+              <h2 className="restaurant-name">{r.name}</h2>
+              <p className="restaurant-location">{r.location}</p>
+              <p className="restaurant-cuisine">Cuisine: {r.cuisine}</p>
+              <p className="restaurant-rating">Rating: ⭐ {r.rating}</p>
             </li>
           ))}
         </ul>
+
       )}
     </div>
   );

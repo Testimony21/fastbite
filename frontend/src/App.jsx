@@ -36,15 +36,15 @@ function AppContent() {
   const location = useLocation();
 
   // Pages with NO footer
-  const noFooterRoutes = ["/login", "/forgot-password", "/signup", "/become-a-courier", "/restaurants-page"];
+  const noFooterRoutes = ["/login", "/forgot-password", "/signup", "/become-a-courier"];
 
   const partnerRoutes = ["/partner-with-us"];
 
   const partnerFooterRoutes = ["/corporate-ordering"];
 
   const renderNavbar = () => {
-    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurantsPage/restaurantsPage") {
-      return <Navbar minimal />; 
+    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants") {
+      return <Navbar minimal />;
     }
     if (partnerRoutes.includes(location.pathname)) {
       return null;
@@ -54,21 +54,22 @@ function AppContent() {
 
   const renderFooter = () => {
     if (noFooterRoutes.includes(location.pathname)) return null;
-    if (partnerRoutes.includes(location.pathname)) return null; 
+    if (partnerRoutes.includes(location.pathname)) return null;
     if (partnerFooterRoutes.includes(location.pathname)) return <PartnerFooter />;
     return <Footer />;
   };
 
   return (
-    <>
+    <div className="app-layout">
       {renderNavbar()}
 
+      <main className="app-main">
       <Routes>
         <Route path="/" element={<Home />} />
 
         <Route path="/partner-with-us" element={<PartnerLayout />}>
           <Route index element={<PartnerWithUs />} />
-          
+
         </Route>
         <Route path="/partner/dashboard" element={<Dashboard />} />
 
@@ -78,15 +79,16 @@ function AppContent() {
         <Route path="/forgot-password" element={<PartnerForgotPassword />} />
         <Route path="/signup" element={<PartnerAuth />} />
         <Route path='/uploadform' element={<UploadForm />} />
-        <Route path='/restaurants'  element={<RestaurantsPage />} />
+        <Route path='/restaurants' element={<RestaurantsPage />} />
       </Routes>
+      </main>
 
       {renderFooter()}
 
       <BackToTop />
 
       <ToastContainer position="top-right" autoClose={3000} />
-    </>
+    </div>
   );
 }
 

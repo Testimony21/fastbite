@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 45px;
-  gap: 180px;
+  padding: 60px;
+  gap: 90px;
 }
 
 .reviews-left {
@@ -69,14 +69,13 @@
   gap: 10px;                 
   width: 100%;                
   list-style: none;
-  background: transparent;
+  /* background: transparent; */
 }
 
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  /* background: #ccc; */
   border: 1px solid #ff5a00;
   flex: 0 0 auto; 
 }

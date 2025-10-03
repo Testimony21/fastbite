@@ -1,5 +1,5 @@
 .faq-section {
-  padding: 1rem 0rem;
+  padding: 1rem 3.7rem;
 }
 
 .faq-container {
@@ -17,7 +17,7 @@
 .faq-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 7rem;
+  gap: 5rem;
 }
 
 .faq-item {
