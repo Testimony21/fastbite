@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
+import menuRoutes from "./routes/menuRoutes.js";
 
 dotenv.config();
 console.log("Connecting to:", process.env.MONGODB_URI);
@@ -47,6 +48,7 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/restaurants", menuRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");

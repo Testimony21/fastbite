@@ -9,7 +9,7 @@ export const createRestaurant = async (req, res) => {
       return res.status(403).json({ message: "Only restaurant owners can add restaurants" });
     }
 
-    const { name, description, address, phone, image } = req.body;
+    const { name, description, address, location, phone, image, cuisine } = req.body;
 
     const restaurant = new Restaurant({
       name,
@@ -17,6 +17,8 @@ export const createRestaurant = async (req, res) => {
       address,
       phone,
       image,
+      location,
+      cuisine,
       owner: req.user.id, // from authMiddleware
     });
 
@@ -36,6 +38,19 @@ export const getRestaurants = async (req, res) => {
     res.json(restaurants);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+export const getRestaurantById = async (req, res) => {
+  try {
+    const restaurant = await Restaurant.findById(req.params.id);
+    if (!restaurant) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    res.json(restaurant);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
