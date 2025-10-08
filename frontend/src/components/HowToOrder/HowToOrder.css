@@ -1,7 +1,6 @@
 .how-to-order {
-  padding: 10px 50px;
+  padding: 10px 60px;
   background-color: #fff;
-  /* text-align: center; */
   color: #333;
   min-height: auto;
 }
@@ -9,7 +8,7 @@
 .how-to-order h2 {
   font-size: 25px;
   color: #ff5a00;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   text-align: center;
 }
 

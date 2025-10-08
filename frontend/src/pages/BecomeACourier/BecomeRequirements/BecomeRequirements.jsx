@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./BecomeRequirements.css";
 import PhoneImage from "../../../assets/Images/fastbite-phone-delivery.png";
@@ -45,7 +46,7 @@ const Requirements = () => {
                         💡 Tips to speed up your application
                     </p>
 
-                    <button className="apply-btn">Apply now</button>
+                    <Link to="/courier-register" className="apply-btn">Apply now</Link>
                 </motion.div>
             </div>
 

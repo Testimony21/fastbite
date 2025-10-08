@@ -46,7 +46,7 @@ function HomeHero() {
                 <FaMapMarkerAlt className="input-icon" />
                 <input
                   type="text"
-                  placeholder="Enter your location"
+                  placeholder="Enter your city in Nigeria"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 />

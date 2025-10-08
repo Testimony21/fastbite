@@ -1,4 +1,3 @@
-// src/pages/RestaurantsPage.jsx
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./RestaurantsPage.css";
@@ -23,7 +22,7 @@ const RestaurantsPage = () => {
         if (!res.ok) throw new Error("Failed to fetch restaurants");
 
         const data = await res.json();
-        setRestaurants(data);
+        setRestaurants(Array.isArray(data.restaurants) ? data.restaurants : []);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -49,27 +48,26 @@ const RestaurantsPage = () => {
         <ul className="restaurants-list">
           {restaurants.map((r) => (
             <li key={r._id} className="restaurant-card">
-              {/* Restaurant Image */}
-              {r.image && (
-                <img
-                  src={r.image}
-                  alt={r.name}
-                  className="restaurant-img"
-                />
-              )}
-
-              {/* Restaurant Info */}
-              <h2 className="restaurant-name">{r.name}</h2>
-              <p className="restaurant-location">{r.location}</p>
-              <p className="restaurant-cuisine">Cuisine: {r.cuisine}</p>
-              <p className="restaurant-rating">Rating: ⭐ {r.rating}</p>
+              <Link to={`/restaurants/${r._id}`} className="restaurant-link">
+                {r.image && (
+                  <img
+                    src={r.image}
+                    alt={r.name}
+                    className="restaurant-img"
+                  />
+                )}
+                </Link>
+                <h2 className="restaurant-name">{r.name}</h2>
+                <p className="restaurant-location">{r.location}</p>
+                <p className="restaurant-cuisine">Cuisine: {r.cuisine}</p>
+                <p className="restaurant-rating">Rating: ⭐ {r.rating}</p>
+              
             </li>
           ))}
         </ul>
-
       )}
     </div>
   );
-}
+};
 
 export default RestaurantsPage;

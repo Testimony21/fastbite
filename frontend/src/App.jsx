@@ -31,19 +31,22 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CourierRegister from './pages/BecomeACourier/CourierRegister/CourierRegister';
+import RestaurantMenuPage from './pages/RestaurantMenuPage/RestaurantMenuPage';
+import CartPage from './pages/CartPage/CartPage';
 
 function AppContent() {
   const location = useLocation();
 
   // Pages with NO footer
-  const noFooterRoutes = ["/login", "/forgot-password", "/signup", "/become-a-courier"];
+  const noFooterRoutes = ["/login", "/forgot-password", "/signup", "/become-a-courier", "/courier-register"];
 
   const partnerRoutes = ["/partner-with-us"];
 
   const partnerFooterRoutes = ["/corporate-ordering"];
 
   const renderNavbar = () => {
-    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants") {
+    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants" || location.pathname === "/courier-register" || location.pathname.startsWith("/restaurants/")) {
       return <Navbar minimal />;
     }
     if (partnerRoutes.includes(location.pathname)) {
@@ -64,23 +67,27 @@ function AppContent() {
       {renderNavbar()}
 
       <main className="app-main">
-      <Routes>
-        <Route path="/" element={<Home />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/partner-with-us" element={<PartnerLayout />}>
-          <Route index element={<PartnerWithUs />} />
+          <Route path="/partner-with-us" element={<PartnerLayout />}>
+            <Route index element={<PartnerWithUs />} />
 
-        </Route>
-        <Route path="/partner/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route path="/partner/dashboard" element={<Dashboard />} />
 
-        <Route path="/become-a-courier" element={<BecomeACourier />} />
+          <Route path="/become-a-courier" element={<BecomeACourier />} />
+          <Route path="/courier-register" element={<CourierRegister />} />
 
-        <Route path="/login" element={<PartnerAuth />} />
-        <Route path="/forgot-password" element={<PartnerForgotPassword />} />
-        <Route path="/signup" element={<PartnerAuth />} />
-        <Route path='/uploadform' element={<UploadForm />} />
-        <Route path='/restaurants' element={<RestaurantsPage />} />
-      </Routes>
+          <Route path="/cart" element={<CartPage />} />
+
+          <Route path="/login" element={<PartnerAuth />} />
+          <Route path="/forgot-password" element={<PartnerForgotPassword />} />
+          <Route path="/signup" element={<PartnerAuth />} />
+          <Route path='/uploadform' element={<UploadForm />} />
+          <Route path='/restaurants' element={<RestaurantsPage />} />
+          <Route path='/restaurants/:id' element={<RestaurantMenuPage />} />
+        </Routes>
       </main>
 
       {renderFooter()}

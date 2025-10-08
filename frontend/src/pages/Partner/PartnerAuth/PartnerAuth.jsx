@@ -132,7 +132,7 @@ export default function PartnerAuth() {
                   onChange={handleChange}
                   required
                 />
-                <select name="role" value={form.role} onChange={handleChange}>
+                <select name="role" className="select" value={form.role} onChange={handleChange}>
                   <option value="user">User</option>
                   <option value="restaurant">Restaurant Owner</option>
                 </select>

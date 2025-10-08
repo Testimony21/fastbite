@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaMotorcycle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import courierHero1 from "../../assets/Images/fastbite-image12.jpg";
 import courierHero2 from "../../assets/Images/courier3.jpg";
 import courierHero3 from "../../assets/Images/courier2.jpg"; // add more if you like
@@ -38,10 +39,10 @@ const BecomeCourierHero = () => {
             <p>
               Make extra money fast and fit delivering around your lifestyle.
             </p>
-            <button className="apply-now-btn">
+            <Link to="/courier-register" className="apply-now-btn">
               <FaMotorcycle className="motorcycle-icon" />
               Apply now
-            </button>
+            </Link>
           </div>
         </div>
       </section>

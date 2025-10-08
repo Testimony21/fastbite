@@ -85,6 +85,34 @@
   display: none;
 }
 
+.navbar.minimal .nav-right {
+  margin-left: auto;
+}
+
+.cart-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+}
+
+.cart-link:hover {
+  color: #e14b00;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: #ff5a00;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 1.5px 6px;
+}
+
 .navbar.become {
   background: transparent;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;

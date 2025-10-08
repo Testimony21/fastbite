@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 2rem;
-  padding: 1rem;
-  max-width: 1250px;
+  gap: 10rem;
+  padding: 2rem;
+  max-width: 1500px;
   margin: auto;
   background: #f9f9f9;
   border-radius: 10px;
