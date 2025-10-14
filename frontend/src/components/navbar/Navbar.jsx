@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
+import { CartContext } from "../../Context/CartContext";
 import "./Navbar.css";
 
 const defaultHomeLinks = [
@@ -32,54 +33,41 @@ export default function Navbar({ overrideLinks, minimal = false }) {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
-  const [cartCount, setCartCount] = useState(0); // ✅ moved out of conditional
 
-  const showCart = location.pathname.startsWith("/restaurants/");
+  // ✅ Use cart context properly inside component
+  const { cart } = useContext(CartContext);
 
-  // ✅ Sync user from localStorage
+  const showCart =
+    location.pathname.startsWith("/restaurants/") ||
+    location.pathname === "/cart";
+
+  // ✅ Load user info
   useEffect(() => {
     try {
       const stored = localStorage.getItem("userInfo");
       const parsed = stored ? JSON.parse(stored) : null;
       setUserInfo(parsed);
-    } catch (err) {
+    } catch {
       setUserInfo(null);
     }
   }, [location.pathname]);
 
-  // ✅ Scroll effect
+  // ✅ Handle scroll
   useEffect(() => {
     const handleScroll = () => setHasScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Cart effect (only relevant if minimal)
-  useEffect(() => {
-    if (minimal) {
-      const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-      setCartCount(storedCart.length);
-
-      const handleStorageChange = () => {
-        const updatedCart = JSON.parse(localStorage.getItem("cart")) || [];
-        setCartCount(updatedCart.length);
-      };
-
-      window.addEventListener("storage", handleStorageChange);
-      return () => window.removeEventListener("storage", handleStorageChange);
-    }
-  }, [location.pathname, minimal]);
-
   const handleSignOut = () => {
-    const confirmLogout = window.confirm("Are you sure you want to sign out?");
-    if (confirmLogout) {
+    if (window.confirm("Are you sure you want to sign out?")) {
       localStorage.removeItem("userInfo");
       setUserInfo(null);
       navigate("/");
     }
   };
 
-  // --- Determine links ---
+  // ✅ Determine links
   let links = defaultHomeLinks;
   let navType = "home";
 
@@ -87,42 +75,39 @@ export default function Navbar({ overrideLinks, minimal = false }) {
     links = becomeLinks;
     navType = "become";
   } else if (path.startsWith("/partner-with-us")) {
-    if (userInfo?.token && userInfo.role === "restaurant") {
-      links = [...partnerLinksUser, { label: "Sign Out", action: handleSignOut }];
-    } else {
-      links = partnerLinksGuest;
-    }
+    links =
+      userInfo?.token && userInfo.role === "restaurant"
+        ? [...partnerLinksUser, { label: "Sign Out", action: handleSignOut }]
+        : partnerLinksGuest;
     navType = "partner";
   } else if (path === "/" || path === "/home") {
-    if (userInfo?.token) {
-      links = [
-        { label: "Become a courier", path: "/become-a-courier" },
-        { label: "Partner with us", path: "/partner-with-us" },
-        { label: "Sign Out", action: handleSignOut },
-      ];
-    } else {
-      links = defaultHomeLinks;
-    }
+    links = userInfo?.token
+      ? [
+          { label: "Become a courier", path: "/become-a-courier" },
+          { label: "Partner with us", path: "/partner-with-us" },
+          { label: "Sign Out", action: handleSignOut },
+        ]
+      : defaultHomeLinks;
     navType = "home";
   }
 
-  if (overrideLinks && Array.isArray(overrideLinks)) {
-    links = overrideLinks;
-  }
+  if (overrideLinks && Array.isArray(overrideLinks)) links = overrideLinks;
 
-  // ✅ Minimal Navbar Render
+  // ✅ Minimal Navbar (used on restaurant pages)
   if (minimal) {
     return (
       <nav className="navbar minimal">
         <div className="nav-left">
-          <NavLink to="/" className="logo">FastBite</NavLink>
+          <NavLink to="/" className="logo">
+            FastBite
+          </NavLink>
         </div>
 
         {showCart && (
           <div className="nav-right">
             <NavLink to="/cart" className="cart-link">
               <FaShoppingCart size={22} />
-              <span className="cart-badge">{cartCount}</span>
+              <span className="cart-badge">{cart?.totalItems || 0}</span>
             </NavLink>
           </div>
         )}
@@ -130,11 +115,13 @@ export default function Navbar({ overrideLinks, minimal = false }) {
     );
   }
 
-  // ✅ Full Navbar Render
+  // ✅ Full Navbar
   return (
     <nav className={`navbar ${navType} ${hasScrolled ? "scrolled" : ""}`}>
       <div className="nav-left">
-        <NavLink to="/" className="logo">FastBite</NavLink>
+        <NavLink to="/" className="logo">
+          FastBite
+        </NavLink>
       </div>
 
       <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
@@ -143,7 +130,7 @@ export default function Navbar({ overrideLinks, minimal = false }) {
 
       <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
         {links.map((l, i) => (
-          <li key={i} className={l.className || ""}>
+          <li key={i}>
             {l.action ? (
               <NavLink onClick={l.action} className="signout-btn">
                 {l.label}
@@ -155,12 +142,21 @@ export default function Navbar({ overrideLinks, minimal = false }) {
                 end={l.path === "/"}
                 onClick={() => setMenuOpen(false)}
               >
-                {l.label} {l.icon || null}
+                {l.label}
               </NavLink>
             )}
           </li>
         ))}
       </ul>
+
+      {showCart && (
+        <div className="cart-icon-wrapper">
+          <NavLink to="/cart" className="cart-link">
+            <FaShoppingCart size={22} />
+            <span className="cart-badge">{cart?.totalItems || 0}</span>
+          </NavLink>
+        </div>
+      )}
     </nav>
   );
 }

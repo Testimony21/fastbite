@@ -1,14 +1,17 @@
 // src/pages/RestaurantMenuPage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./RestaurantMenuPage.css";
 import Navbar from "../../components/navbar/Navbar";
+import { CartContext } from "../../../src/Context/CartContext";
 
 const RestaurantMenuPage = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { addToCart } = useContext(CartContext); // ✅ Access addToCart from context
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,14 +44,11 @@ const RestaurantMenuPage = () => {
       <div className="restaurant-menu-page">
         {restaurant && (
           <div className="restaurant-header">
-            <img src={restaurant.image} alt={restaurant.name} />
             <h1>{restaurant.name}</h1>
-            <p>{restaurant.description}</p>
-            <p>{restaurant.location}</p>
           </div>
         )}
 
-        <h2>Menu</h2>
+        <h2 className="menu-title">Menu</h2>
         {menus.length === 0 ? (
           <p>No menu items yet.</p>
         ) : (
@@ -59,7 +59,7 @@ const RestaurantMenuPage = () => {
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <p>₦{item.price.toLocaleString()}</p>
-                <button>Add to Cart</button>
+                <button onClick={() => addToCart(item)}>Add to Cart</button> {/* ✅ Functional */}
               </div>
             ))}
           </div>
