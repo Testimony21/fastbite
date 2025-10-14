@@ -1,10 +1,17 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import dotenv from "dotenv";
 
-const protect = async (req, res, next) => {
-  let token ;
+dotenv.config();
 
-  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+// ✅ Verify user token
+export const protect = async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
     try {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -16,7 +23,8 @@ const protect = async (req, res, next) => {
       }
 
       next();
-    } catch (err) {
+    } catch (error) {
+      console.error("🚫 Token verification failed:", error.message);
       return res.status(401).json({ message: "Not authorized, token failed" });
     }
   } else {
@@ -24,20 +32,20 @@ const protect = async (req, res, next) => {
   }
 };
 
-const adminOnly = (req, res, next) => {
-  if (req.user && req.user.role === "admin") {
+// ✅ Restrict to admin users only
+export const adminOnly = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
     next();
   } else {
-    return res.status(403).json({ message: "Admin access only" });
+    res.status(403).json({ message: "Access denied. Admins only." });
   }
 };
 
-const restaurantOnly = (req, res, next) => {
+// ✅ Restrict to restaurant owners only
+export const restaurantOnly = (req, res, next) => {
   if (req.user && req.user.role === "restaurant") {
     next();
   } else {
-    return res.status(403).json({ message: "Restaurant owner access only" });
+    res.status(403).json({ message: "Access denied. Restaurant only." });
   }
 };
-
-export { protect, adminOnly, restaurantOnly };
