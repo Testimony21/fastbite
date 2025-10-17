@@ -87,4 +87,36 @@ router.get("/", protect, async (req, res) => {
   }
 });
 
+// ✅ Remove item from cart
+router.delete("/:productId", protect, async (req, res) => {
+  try {
+    const { productId } = req.params;
+
+    let cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+    // Filter out the product being removed
+    const initialCount = cart.products.length;
+    cart.products = cart.products.filter(
+      (item) => item.product.toString() !== productId
+    );
+
+    if (cart.products.length === initialCount) {
+      return res.status(404).json({ message: "Item not found in cart" });
+    }
+
+    await cart.save();
+
+    const totalItems = cart.products.reduce((sum, p) => sum + p.quantity, 0);
+
+    res.json({
+      message: "Item removed from cart",
+      totalItems,
+    });
+  } catch (err) {
+    console.error("❌ Error removing item from cart:", err);
+    res.status(500).json({ message: "Error removing item", error: err.message });
+  }
+});
+
 export default router;
