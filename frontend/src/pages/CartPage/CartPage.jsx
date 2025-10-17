@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
+import { useCart } from "../../Context/CartContext";
 import "./CartPage.css";
 
 const CartPage = () => {
@@ -28,7 +29,6 @@ const CartPage = () => {
                   <h3>{item.name}</h3>
                   <p>₦{item.price}</p>
                   <div className="cart-actions">
-                    <span>{item.quantity}</span>
                     <button
                       className="remove-btn"
                       onClick={() => removeFromCart(item.productId)}

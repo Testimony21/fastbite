@@ -22,6 +22,7 @@ const RestaurantMenuPage = () => {
 
         // Fetch menus
         const resMenus = await fetch(`http://localhost:5000/api/restaurants/${id}/menus`);
+
         const menuData = await resMenus.json();
 
         setRestaurant(restaurantData);

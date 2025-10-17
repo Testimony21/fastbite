@@ -1,43 +1,37 @@
 .restaurants-page {
   padding: 100px 32px; /* account for fixed navbar */
   max-width: 1200px;
-  /* margin: auto; */
+  margin: auto;
 }
 
 .page-title {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   color: #222;
-}
-
-.loading,
-.error,
-.no-results {
   text-align: center;
-  font-size: 18px;
-  margin-top: 40px;
 }
 
-.error {
-  color: #f44336;
-}
-
+/* Make the cards display in rows */
 .restaurants-list {
+  display: flex;
+  flex-wrap: wrap; /* allows wrapping to next line */
+  gap: 20px; /* space between cards */
   list-style: none;
   padding: 0;
   margin: 0;
+  justify-content: space-between; /* distribute cards evenly */
 }
 
 .restaurant-card {
+  flex: 1 1 calc(25% - 20px); /* 4 cards per row */
   border: 1px solid #ddd;
-  padding: 26px;
+  padding: 20px;
   border-radius: 8px;
   background: #fff;
-  margin-bottom: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  width: 25%;
+  box-sizing: border-box;
 }
 
 .restaurant-card:hover {
@@ -45,35 +39,42 @@
   box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
+.restaurant-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
 .restaurant-name {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: #333;
 }
 
-.restaurant-location {
+.restaurant-location,
+.restaurant-cuisine,
+.restaurant-rating {
   font-size: 14px;
-  color: #666;
   margin-bottom: 4px;
 }
 
 .restaurant-cuisine {
-  font-size: 14px;
   color: #ff5722;
-  font-weight: bold;
-  margin-bottom: 4px;
+  font-weight: 600;
 }
 
-.restaurant-rating {
-  font-size: 14px;
-  color: #444;
+
+@media (max-width: 768px) {
+  .restaurant-card {
+    flex: 1 1 calc(50% - 20px); /* 2 per row on tablets */
+  }
 }
 
-.restaurant-img {
-  width: 100%;
-  height:200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
+@media (max-width: 480px) {
+  .restaurant-card {
+    flex: 1 1 100%; /* full width on phones */
+  }
 }

@@ -47,7 +47,7 @@ function AppContent() {
   const partnerFooterRoutes = ["/corporate-ordering"];
 
   const renderNavbar = () => {
-    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants" || location.pathname === "/courier-register" || location.pathname.startsWith("/restaurants/")) {
+    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants" || location.pathname === "/courier-register" || location.pathname.startsWith("/restaurants/") || location.pathname === "/cart") {
       return <Navbar minimal />;
     }
     if (partnerRoutes.includes(location.pathname)) {

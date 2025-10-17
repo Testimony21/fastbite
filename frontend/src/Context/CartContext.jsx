@@ -4,12 +4,11 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({ items: [], totalItems: 0 });
+  const [cartCount, setCartCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  // ✅ Backend base URL
   const BASE_URL = "http://localhost:5000";
 
-  // ✅ Get token from localStorage
   const getToken = () => {
     const userData = localStorage.getItem("userInfo");
     if (!userData) return null;
@@ -21,7 +20,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // ✅ Fetch Cart
+  // ✅ Fetch cart from backend
   const fetchCart = async () => {
     const token = getToken();
     if (!token) {
@@ -38,6 +37,7 @@ export const CartProvider = ({ children }) => {
       const data = await res.json();
       if (res.ok) {
         setCart(data); // { items, totalItems }
+        setCartCount(data.totalItems || 0);
       } else {
         console.error("❌ Error fetching cart:", data.message);
       }
@@ -48,90 +48,98 @@ export const CartProvider = ({ children }) => {
     }
   };
 
- const addToCart = async (productId, quantity = 1) => {
-  const token = getToken();
-  if (!token) {
-    console.warn("⚠️ No token found. Please log in first.");
-    return;
-  }
+  // ✅ Add to cart
+  const addToCart = async (productId, quantity = 1) => {
+    const token = getToken();
+    if (!token) {
+      console.warn("⚠️ No token found. Please log in first.");
+      return;
+    }
 
-  try {
-    const response = await fetch(`${BASE_URL}/api/cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ productId, quantity }),
-    });
+    try {
+      const response = await fetch(`${BASE_URL}/api/cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ productId, quantity }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      console.log("✅ Added to cart successfully:", data);
+      if (response.ok) {
+        console.log("✅ Added to cart successfully:", data);
 
-      // ✅ Update totalItems immediately
+        setCart((prev) => ({
+          ...prev,
+          totalItems: data.totalItems,
+        }));
+        setCartCount(data.totalItems || 0);
+
+        // ✅ Refresh cart items
+        fetchCart();
+      } else {
+        console.error("❌ Error adding to cart:", data.message);
+      }
+    } catch (error) {
+      console.error("❌ Error adding to cart:", error.message);
+    }
+  };
+
+  // ✅ Remove from cart
+  const removeFromCart = async (productId) => {
+    const token = getToken();
+    if (!token) {
+      console.warn("⚠️ No token found. Please log in first.");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${BASE_URL}/api/cart/${productId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!res.ok) throw new Error("Failed to remove item");
+
+      const data = await res.json();
+
+      // ✅ Update local state immediately
       setCart((prev) => ({
         ...prev,
-        totalItems: data.totalItems,
+        items: prev.items.filter((item) => item.productId !== productId),
+        totalItems: data.totalItems || 0,
       }));
 
-      // ✅ Then fetch full updated cart from backend (items + quantities)
-      fetchCart();
-    } else {
-      console.error("❌ Error adding to cart:", data.message);
+      setCartCount(data.totalItems || 0);
+
+      console.log("✅ Removed from cart:", data);
+    } catch (error) {
+      console.error("❌ Error removing from cart:", error);
     }
-  } catch (error) {
-    console.error("❌ Error adding to cart:", error.message);
-  }
-};
+  };
 
-// ✅ Remove item from cart
-const removeFromCart = async (productId) => {
-  const token = getToken();
-  if (!token) {
-    console.warn("⚠️ No token found. Please log in first.");
-    return;
-  }
-
-  try {
-    const response = await fetch(`${BASE_URL}/api/cart/${productId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      console.log("🗑️ Item removed from cart:", data);
-      
-      // ✅ Instantly update local cart state
-      setCart((prevCart) => ({
-        ...prevCart,
-        items: prevCart.items.filter((item) => item.productId !== productId),
-        totalItems: data.totalItems || prevCart.totalItems - 1,
-      }));
-
-      // ✅ Optionally refetch full cart for accuracy
-      fetchCart();
-    } else {
-      console.error("❌ Error removing item:", data.message);
-    }
-  } catch (error) {
-    console.error("❌ Error removing from cart:", error.message);
-  }
-};
-
-  // ✅ Fetch cart when page loads
   useEffect(() => {
     fetchCart();
   }, []);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart,  removeFromCart, fetchCart, loading }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        setCart,
+        cartCount,
+        setCartCount,
+        addToCart,
+        removeFromCart,
+        fetchCart,
+        loading,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
+
+export const useCart = () => React.useContext(CartContext);
