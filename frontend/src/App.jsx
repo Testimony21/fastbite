@@ -65,10 +65,9 @@ function AppContent() {
 
   return (
     <CartProvider>
-      <div className="app-layout">
         {renderNavbar()}
 
-        <main className="app-main">
+        <main>
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -99,7 +98,6 @@ function AppContent() {
         <BackToTop />
 
         <ToastContainer position="top-right" autoClose={3000} />
-      </div>
     </CartProvider>
   );
 }

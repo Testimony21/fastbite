@@ -33,6 +33,7 @@ backend/node_modules/
 
 # Build outputs
 frontend/build/
+dist/
 backend/dist/
 
 # Coverage reports
