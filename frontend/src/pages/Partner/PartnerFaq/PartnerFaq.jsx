@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import "./PartnerFaq.css";
 
 const faqs = [
@@ -48,7 +49,7 @@ const PartnerFaq = () => {
             <div className="faq-question" onClick={() => toggleFAQ(index)}>
               <span>{faq.question}</span>
               <span className="faq-icon">
-                {openIndex === index ? "▲" : "▼"}
+                {openIndex === index ? <FiChevronUp /> : <FiChevronDown />}
               </span>
             </div>
             <div

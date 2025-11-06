@@ -2,17 +2,18 @@ import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 import { CartContext } from "../../Context/CartContext";
+import { toast } from "react-toastify";
 import "./Navbar.css";
 
 const defaultHomeLinks = [
-  { label: "Become a courier", path: "/become-a-courier" },
+  // { label: "Become a courier", path: "/become-a-courier" },
   { label: "Partner with us", path: "/partner-with-us" },
   { label: "Log in", path: "/login" },
 ];
 
 const becomeLinks = [
-  { label: "Inside track", path: "/become-a-courier#inside-track" },
-  { label: "Apply now", path: "/courier-register" },
+  // { label: "Inside track", path: "/become-a-courier#inside-track" },
+  // { label: "Apply now", path: "/courier-register" },
 ];
 
 const partnerLinksGuest = [
@@ -60,21 +61,36 @@ export default function Navbar({ overrideLinks, minimal = false }) {
   }, []);
 
   const handleSignOut = () => {
-    if (window.confirm("Are you sure you want to sign out?")) {
-      localStorage.removeItem("userInfo");
-      setUserInfo(null);
-      navigate("/");
-    }
-  };
+  toast.info(
+    <div className="signout-toast">
+      <p>Are you sure you want to sign out?</p>
+      <div className="toast-buttons">
+        <button
+          className="toast-btn toast-ok"
+          onClick={() => {
+            localStorage.removeItem("userInfo");
+            setUserInfo(null);
+            toast.dismiss();
+            toast.success("Signed out successfully!");
+            navigate("/");
+          }}
+        >
+          Okay
+        </button>
+      </div>
+    </div>,
+    { autoClose: false, icon: false }
+  );
+};
 
   // ✅ Determine links
   let links = defaultHomeLinks;
   let navType = "home";
 
-  if (path.startsWith("/become-a-courier")) {
-    links = becomeLinks;
-    navType = "become";
-  } else if (path.startsWith("/partner-with-us")) {
+  // if (path.startsWith("/become-a-courier")) {
+  //   links = becomeLinks;
+  //   navType = "become";
+  if (path.startsWith("/partner-with-us")) {
     links =
       userInfo?.token && userInfo.role === "restaurant"
         ? [...partnerLinksUser, { label: "Sign Out", action: handleSignOut }]
@@ -83,7 +99,7 @@ export default function Navbar({ overrideLinks, minimal = false }) {
   } else if (path === "/" || path === "/home") {
     links = userInfo?.token
       ? [
-          { label: "Become a courier", path: "/become-a-courier" },
+          // { label: "Become a courier", path: "/become-a-courier" },
           { label: "Partner with us", path: "/partner-with-us" },
           { label: "Sign Out", action: handleSignOut },
         ]

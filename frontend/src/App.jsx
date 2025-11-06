@@ -22,16 +22,16 @@ import PartnerFooter from './pages/Partner/PartnerFooter/PartnerFooter';
 import PartnerAuth from './pages/Partner/PartnerAuth/PartnerAuth';
 import PartnerForgotPassword from './pages/Partner/PartnerAuth/PartnerForgotPassword/PartnerForgotPassword';
 import PartnerLayout from './pages/Partner/PartnerLayout/PartnerLayout';
-import BecomeACourier from './pages/BecomeACourier/BecomeACourier';
+// import BecomeACourier from './pages/BecomeACourier/BecomeACourier';
 // import BecomeWhyDeliver from './pages/BecomeACourier/BecomeACourier';
-import BecomeRequirements from './pages/BecomeACourier/BecomeRequirements/BecomeRequirements';
-import BecomeQuestions from './pages/BecomeACourier/BecomeQuestions/BecomeQuestions';
+// import BecomeRequirements from './pages/BecomeACourier/BecomeRequirements/BecomeRequirements';
+// import BecomeQuestions from './pages/BecomeACourier/BecomeQuestions/BecomeQuestions';
 import UploadForm from './pages/Partner/UploadForm/UploadForm';
 import Dashboard from "./pages/Dashboard/Dashboard";
 import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CourierRegister from './pages/BecomeACourier/CourierRegister/CourierRegister';
+// import CourierRegister from './pages/BecomeACourier/CourierRegister/CourierRegister';
 import RestaurantMenuPage from './pages/RestaurantMenuPage/RestaurantMenuPage';
 import CartPage from './pages/CartPage/CartPage';
 import { CartProvider } from './Context/CartContext';
@@ -78,8 +78,8 @@ function AppContent() {
             </Route>
             <Route path="/partner/dashboard" element={<Dashboard />} />
 
-            <Route path="/become-a-courier" element={<BecomeACourier />} />
-            <Route path="/courier-register" element={<CourierRegister />} />
+            {/* <Route path="/become-a-courier" element={<BecomeACourier />} /> */}
+            {/* <Route path="/courier-register" element={<CourierRegister />} /> */}
 
             <Route path="/cart" element={<CartPage />} />
 

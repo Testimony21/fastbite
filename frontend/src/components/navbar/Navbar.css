@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 60px;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -29,10 +29,6 @@
 }
 
 /* --- Home Navbar --- */
-.navbar.home {
-  background: transparent;
-}
-
 .navbar.home .logo {
   color: white;
 }
@@ -45,17 +41,17 @@
   text-decoration: none;
 }
 
-.navbar.home.scrolled {
+.navbar.home {
   background: white;
-  box-shadow: 0 4px 6px #ff5a00;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
 }
 
-.navbar.home.scrolled .logo {
+.navbar.home .logo {
   color: #ff5a00;
 }
 
-.navbar.home.scrolled .nav-links li a,
-.navbar.home.scrolled .menu-icon {
+.navbar.home .nav-links li a,
+.navbar.home .menu-icon {
   color: #000000;
 }
 
@@ -114,7 +110,7 @@
   padding: 1.5px 6px;
 }
 
-.navbar.become {
+/* .navbar.become {
   background: transparent;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -134,12 +130,7 @@
 .navbar.become .nav-links li a:hover {
   text-decoration: underline;
   color: #000;
-}
-
-.navbar.become.scrolled {
-  background: white;
-  box-shadow: 0 4px 6px #ff5a00;
-}
+} 
 
 .navbar.become.scrolled .logo {
   color: #ff5a00;
@@ -156,6 +147,37 @@
 .motorcycle-icon {
   font-size: 1.2rem;
   margin-right: 8px;
+}*/
+
+.signout-toast {
+  color: #333;
+  font-size: 15px;
+  text-align: center;
+}
+
+.toast-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: left;
+  gap: 12px;
+}
+
+.toast-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.toast-ok {
+  background-color: #ff4d00;
+  color: #fff;
+}
+
+.toast-ok:hover {
+  background-color: #e43e00;
 }
 
 .menu-icon {

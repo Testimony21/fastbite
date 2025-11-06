@@ -2,14 +2,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./RestaurantMenuPage.css";
-import Navbar from "../../components/navbar/Navbar";
 import { CartContext } from "../../../src/Context/CartContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const RestaurantMenuPage = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
   const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [addingToCart, setAddingToCart] = useState(false);
 
   const { addToCart } = useContext(CartContext); // ✅ Access addToCart from context
 
@@ -37,11 +38,29 @@ const RestaurantMenuPage = () => {
     fetchData();
   }, [id]);
 
+  const handleAddToCart = async (item) => {
+    setAddingToCart(true);
+    try {
+      await addToCart(item);
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+    } finally {
+      // simulate short delay for smoother UX
+      setTimeout(() => setAddingToCart(false), 500);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
     <>
-      <Navbar minimal />
+      {addingToCart && (
+        <div className="loading-overlay">
+          <ClipLoader color="#ffffff" size={50} />
+          <p className="loader-text">Adding to cart...</p>
+        </div>
+      )}
+
       <div className="restaurant-menu-page">
         {restaurant && (
           <div className="restaurant-header">
@@ -60,7 +79,9 @@ const RestaurantMenuPage = () => {
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <p>₦{item.price.toLocaleString()}</p>
-                <button onClick={() => addToCart(item)}>Add to Cart</button> {/* ✅ Functional */}
+                <button onClick={() => handleAddToCart(item)} disabled={addingToCart}>
+                  {addingToCart ? "Please wait..." : "Add to Cart"}
+                </button>
               </div>
             ))}
           </div>

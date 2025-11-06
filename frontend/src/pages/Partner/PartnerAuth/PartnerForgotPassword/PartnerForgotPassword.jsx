@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { FaArrowLeft, FaCheckCircle, FaTimes } from "react-icons/fa";
 import forgotImage1 from "../../../../assets/Images/fastbite-image2.jpg";
 import "./PartnerForgotPassword.css";
@@ -14,21 +15,22 @@ const ForgotPassword = () => {
     if (!email.trim()) return;
 
     try {
-      // Call backend forgot-password route
-      const res = await fetch(`&{API_URL}/api/auth/forgot-password`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      // Correct Axios call to backend
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/forgot-password`,
+        { email: email.trim().toLowerCase() }
+      );
 
-      if (res.ok) {
+      if (res.status === 200) {
         setSubmitted(true);
-      } else {
-        alert("No account found with that email");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong.");
+      if (err.response?.status === 404) {
+        alert("No account found with that email");
+      } else {
+        alert("Something went wrong. Please try again later.");
+      }
     }
   };
 
@@ -59,7 +61,9 @@ const ForgotPassword = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit" className="confirm-btn">Confirm</button>
+            <button type="submit" className="confirm-btn">
+              Confirm
+            </button>
           </form>
           <hr />
 
