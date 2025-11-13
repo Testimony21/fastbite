@@ -66,3 +66,38 @@
   height: auto;
 }
 
+/* Hide the mobile image on desktop */
+.mobile-img {
+  display: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .partner-get-with-us {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Show the image after h1 only on mobile */
+  .partner-get-with-us .left h1::after {
+    content: "";
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem 0;
+    height: auto;
+    background-image: url('../../../assets/Images/fastbite-image8.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+  }
+
+  /* Hide the original right image on mobile */
+  .partner-get-with-us .right img {
+    display: none;
+  }
+
+  .get-started-btn {
+    width: 100%;
+  }
+}

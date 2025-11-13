@@ -2,14 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap;
   padding: 20px 60px;
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 70px;
   z-index: 1000;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .logo {
@@ -186,68 +187,81 @@
   cursor: pointer;
 }
 
-/* ✅ Small screens */
-@media screen and (max-width: 768px) {
-  .menu-icon {
-    display: block;
-    color: inherit;
+@media (max-width: 900px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 6px 20px !important; /* reduce vertical space */
+    align-items: flex-start !important; /* lift content upward */
+  }
+
+  .logo {
+    padding: 0 !important;          /* remove top/bottom padding */
+    margin: 0 !important;
+    line-height: 70px;               /* same as navbar height */
+    display: inline-block;
   }
 
   .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    /* background: white; */
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 999;
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-}
-
-/* Mobile responsiveness for navbar */
-@media (max-width: 768px) {
-  .navbar.become .nav-links {
-    display: none;
-    /* hide nav links by default */
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    /* adjust based on navbar height */
-    right: 0;
-    background: white;
-    /* or rgba(0,0,0,0.9) if you want dark menu */
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-end;
+    align-items: flex-start !important; /* aligns links higher */
+    gap: 20px;
     width: 100%;
-    text-align: center;
-    padding: 15px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: transparent !important;
+    position: static !important;
+    visibility: visible !important;
+    transform: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  .navbar.become .nav-links.active {
+  .nav-links li {
+    margin: 0 !important;
     display: flex;
-    /* show nav links when menu is toggled */
+    align-items: center !important;
   }
 
-  .navbar.become .nav-links li {
-    margin: 10px 0;
+  .nav-links a,
+  .nav-links .signout-btn {
+    padding: 8px 10px !important;
+    display: inline-block;
   }
 
   .menu-icon {
-    display: block;
-    /* show hamburger menu */
-    color: white;
-    /* default when navbar is transparent */
-    z-index: 1000;
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    gap: 10px;
   }
 
-  .navbar.become.scrolled .menu-icon {
-    color: #000000;
-    /* change icon color when scrolled */
+  .nav-links a,
+  .nav-links .signout-btn {
+    font-size: 15px;
+  }
+
+  .navbar {
+    padding: 6px 12px !important;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .nav-links {
+    justify-content: flex-end;
+    margin-right: 0 !important;
+    margin-top: -55px !important; 
+    margin-bottom: 55px !important;
+    
+  }
+
+  .navbar {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
   }
 }

@@ -10,15 +10,8 @@
   width: 100%;
   z-index: 1000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.partner-navbar.scrolled {
   background: white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
-}
-
-.partner-navbar.scrolled .logo-link {
-  color: #ff5a00;
 }
 
 .logo-link {
@@ -27,7 +20,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: #ff5a00;
   line-height: 1;
   height: 100%;
   padding-top: 25px;
@@ -57,4 +50,48 @@
   color: white;
   gap: 5px;
   text-decoration: none;
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .partner-navbar {
+    padding: 0 20px;       /* reduce side padding for smaller screens */
+    height: 70px;          /* keep navbar height consistent */
+  }
+
+  .logo-link {
+    font-size: 20px;       /* adjust font size */
+    padding: 0;            /* reset top padding */
+    height: 100%;          /* take full navbar height */
+    display: flex;
+    align-items: center;   /* vertically center */
+  }
+
+  .actions {
+    gap: 10px;
+  }
+
+  .login-btn {
+    padding: 8px 12px;     /* add top & bottom padding */
+    font-size: 14px;
+    height: auto;
+    align-items: center;   /* vertical alignment */
+  }
+}
+
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+  .partner-navbar {
+    padding: 0 15px;
+  }
+
+  .logo-link {
+    font-size: 18px;
+  }
+
+  .login-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
 }

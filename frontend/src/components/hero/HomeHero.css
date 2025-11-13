@@ -41,9 +41,13 @@
 }
 
 .hero .hero-content h1 {
-  font-size: 55px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: bold;
   padding-left: 7px;
   margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hero .hero-content h2 {
@@ -122,65 +126,163 @@
   width: auto;
 }
 
-/* Tablet screens (portrait/landscape) */
-@media screen and (max-width: 1024px) {
-  .hero h1 {
-    font-size: 44px;
+
+
+
+/* ==========================
+   Hero Section – True Responsiveness Fix
+   (Preserves desktop styling, removes overflow)
+========================== */
+
+/* Tablets and below */
+@media (max-width: 1024px) {
+  .hero {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
   }
 
-  .hero h2 {
-    font-size: 20px;
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ensures image covers entire hero */
+    object-position: center;
+  }
+
+  .hero .hero-content {
+    padding-inline: 30px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .hero .hero-content h1,
+  .hero .hero-content h2 {
+    max-width: 100%;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .search-container {
-    justify-content: center;
-  }
-}
-
-/* Mobile devices (phones ≤ 768px) */
-@media screen and (max-width: 768px) {
-  .hero h1 {
-    font-size: 32px;
-    line-height: 1.2;
-  }
-
-  .hero h2 {
-    font-size: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 100%;
+    overflow: hidden;
   }
 
   .location-input,
-  .order-type {
-    width: 100%;
-  }
-
+  .order-type,
   .search-btn {
+    min-width: 150px;
+    flex: 1 1 auto;
     width: 100%;
-    justify-content: center;
   }
 }
 
-/* Very small phones (≤ 480px) */
-@media screen and (max-width: 480px) {
-  .hero h1 {
-    font-size: 26px;
+/* Mobile (stronger rules for small screens) */
+@media (max-width: 600px) {
+  .hero {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
   }
 
-  .hero h2 {
-    font-size: 16px;
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero .hero-content {
+    padding-inline: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .hero .hero-content h1 {
+    font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+    line-height: 1.2;
+    max-width: 100%;
+  }
+
+  .hero .hero-content h2 {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    max-width: 100%;
   }
 
   .search-container {
-    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 12px;
   }
 
-  .location-input input,
-  .order-type select {
-    font-size: 14px;
-    padding: 10px 10px 10px 35px;
-  }
-
+  .location-input,
+  .order-type,
   .search-btn {
-    font-size: 14px;
-    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  button {
+    box-sizing: border-box;
+  }
+}
+
+/* Ultra small screens safety */
+@media (max-width: 360px) {
+  .hero {
+    height: auto; /* allow content to flow naturally */
+    min-height: 100vh;
+  }
+
+  .hero .hero-content {
+    padding: 15px;
+  }
+
+  .hero .hero-content h1,
+  .hero .hero-content h2 {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+}
+/* === Final Overflow Patch (Safe for all screen sizes) === */
+html, body {
+  overflow-x: hidden;
+}
+
+.hero {
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero *,
+.hero-content *,
+.search-container * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Prevent flex children from pushing beyond container */
+.search-container {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+  overflow-x: hidden;
+}
+
+/* Fix for mobile Safari or Chrome rounding issues */
+@supports (-webkit-touch-callout: none) {
+  body {
+    position: relative;
+    left: 0;
+    right: 0;
   }
 }

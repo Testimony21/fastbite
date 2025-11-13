@@ -5,17 +5,21 @@ import { FaArrowLeft, FaCheckCircle, FaTimes } from "react-icons/fa";
 import forgotImage1 from "../../../../assets/Images/fastbite-image2.jpg";
 import "./PartnerForgotPassword.css";
 
-const ForgotPassword = () => {
+export default function PartnerForgotPassword() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim()) return;
 
+    setLoading(true);
+    setError("");
+
     try {
-      // Correct Axios call to backend
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/auth/forgot-password`,
         { email: email.trim().toLowerCase() }
@@ -27,26 +31,27 @@ const ForgotPassword = () => {
     } catch (err) {
       console.error(err);
       if (err.response?.status === 404) {
-        alert("No account found with that email");
+        setError("No account found with that email");
       } else {
-        alert("Something went wrong. Please try again later.");
+        setError("Something went wrong. Please try again later.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="forgot-container">
       <div className="forgot-content">
-        {/* Left Image */}
         <div className="forgot-image">
           <img src={forgotImage1} alt="Partner signup" />
         </div>
 
-        {/* Right Form Section */}
         <div className="forgot-form">
           <div className="back-login" onClick={() => navigate("/login")}>
             <FaArrowLeft className="back-icon" /> <h5>Back to Login</h5>
           </div>
+
           <h2>Forgot your password?</h2>
           <p className="instructions">
             Enter your email below. If an account exists, you’ll receive a reset link.
@@ -61,11 +66,12 @@ const ForgotPassword = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button type="submit" className="confirm-btn">
-              Confirm
+            <button type="submit" className="confirm-btn" disabled={loading}>
+              {loading ? "Sending..." : "Confirm"}
             </button>
           </form>
-          <hr />
+
+          {error && <p className="error">{error}</p>}
 
           {submitted && (
             <div className="success-alert">
@@ -92,6 +98,4 @@ const ForgotPassword = () => {
       </div>
     </div>
   );
-};
-
-export default ForgotPassword;
+}

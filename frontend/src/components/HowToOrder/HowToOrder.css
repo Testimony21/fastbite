@@ -53,13 +53,51 @@
   color: #555;
 }
 
+/* Responsive Fixes */
+@media screen and (max-width: 1024px) {
+  .steps {
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .step {
+    flex: 1 1 300px; /* keep each box equal width */
+    max-width: 320px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .steps {
     flex-direction: column;
     align-items: center;
+    gap: 25px;
+  }
+
+  .step {
+    width: 90%;
+    max-width: 400px;
   }
 
   .how-to-order h1 {
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .how-to-order {
+    padding: 10px 20px;
+  }
+
+  .step {
+    width: 100%;
+  }
+
+  .how-to-order h2 {
+    font-size: 20px;
+  }
+
+  .how-to-order h1 {
+    font-size: 24px;
+  }
+}
+

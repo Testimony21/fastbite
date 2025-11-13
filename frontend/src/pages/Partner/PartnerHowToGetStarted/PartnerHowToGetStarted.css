@@ -53,3 +53,47 @@
   text-align: left;
 }
 
+/* Mobile responsiveness for How To Get Started */
+@media (max-width: 768px) {
+  .how-to-get-started {
+    flex-direction: column;       /* Stack image and text vertically */
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+  }
+
+  .how-to-get-started .image-section,
+  .how-to-get-started .text-section {
+    width: 100%;
+    flex: none;
+  }
+
+  .how-to-get-started .image-section img {
+    width: 100%;
+    height: auto;                /* Maintain aspect ratio */
+    max-height: 300px;           /* Optional: limit height for small screens */
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .how-to-get-started h1 {
+    font-size: 1.8rem;           /* Adjust title for mobile */
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .how-to-get-started .step {
+    gap: 0.8rem;
+  }
+
+  .how-to-get-started .step-icon {
+    font-size: 1.3rem;
+  }
+
+  .how-to-get-started h5 {
+    font-size: 1rem;
+  }
+
+  .how-to-get-started p {
+    font-size: 0.9rem;
+  }
+}
