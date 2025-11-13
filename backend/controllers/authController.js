@@ -1,9 +1,8 @@
-// backend/controllers/authController.js
 import crypto from "crypto";
 import asyncHandler from "express-async-handler";
-import nodemailer from "nodemailer";
 import User from "../models/user.js";
 import generateToken from "../utils/generateToken.js";
+import sendEmail from "../utils/sendEmail.js"; // ✅ Reusable email helper
 
 // Signup user
 export const signupUser = asyncHandler(async (req, res) => {
@@ -76,27 +75,17 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     <p>If you didn’t request this, please ignore this email.</p>
   `;
 
-  // SMTP Transporter (Brevo)
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
-
   try {
-    await transporter.sendMail({
-      from: `"FastBite Support" <${process.env.SMTP_USER}>`,
-      to: user.email,
+    // ✅ Use sendEmail utility
+    await sendEmail({
+      email: user.email,
       subject: "FastBite Password Reset",
-      html: message,
+      message,
     });
 
     res.status(200).json({ message: "Reset email sent successfully" });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Email error:", err);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();

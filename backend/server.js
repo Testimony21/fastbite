@@ -16,6 +16,8 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
+console.log("🔑 Brevo Key Loaded?", !!process.env.BREVO_API_KEY);
+
 // ✅ Connect Database
 console.log("🧩 Connecting to:", process.env.MONGODB_URI);
 connectDB(process.env.MONGODB_URI);
