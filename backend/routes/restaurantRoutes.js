@@ -17,7 +17,7 @@ router.get("/search", async (req, res) => {
     const { location, cuisine, page = 1, limit = 10, sortBy = "rating", order = "desc" } = req.query;
 
     const filters = {};
-    if (location) filters.location = { $regex: location, $options: "i" };
+    if (location) filters.location = { $regex: location.trim(), $options: "i" }; // exact, case-insensitive
     if (cuisine) filters.cuisine = { $regex: cuisine, $options: "i" };
 
     const skip = (page - 1) * limit;
@@ -30,15 +30,12 @@ router.get("/search", async (req, res) => {
 
     const total = await Restaurant.countDocuments(filters);
 
-    if (!restaurants.length) {
-      return res.status(404).json({ message: "No restaurants found for your search." });
-    }
-
+    // Remove the 404: always return an array
     res.json({
       total,
       page: Number(page),
       pages: Math.ceil(total / limit),
-      restaurants,
+      restaurants, // could be empty []
     });
   } catch (error) {
     console.error("Error fetching restaurants:", error.message);
