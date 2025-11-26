@@ -16,9 +16,12 @@ const RestaurantsPage = () => {
       try {
         setLoading(true); // show loader
 
+        const BACKEND_URL = import.meta.env.VITE_API_URL;
+
         const res = await fetch(
-          `http://localhost:5000/api/restaurants/search?location=${location}`
+          `${BACKEND_URL}/api/restaurants/search?location=${location}`
         );
+
         if (!res.ok) throw new Error("Failed to fetch restaurants");
 
         const data = await res.json();

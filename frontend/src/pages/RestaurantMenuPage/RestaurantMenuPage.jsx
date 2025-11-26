@@ -6,6 +6,8 @@ import { CartContext } from "../../Context/CartContext";
 import { useLoading } from "../../Context/LoadingContext/LoadingContext"; 
 import ClipLoader from "react-spinners/ClipLoader";
 
+const BACKEND_URL = import.meta.env.VITE_API_URL;
+
 const RestaurantMenuPage = () => {
   const { id } = useParams();
   const [restaurant, setRestaurant] = useState(null);
@@ -13,18 +15,19 @@ const RestaurantMenuPage = () => {
   const [addingToCart, setAddingToCart] = useState(false);
 
   const { addToCart } = useContext(CartContext);
-
-  const { setLoading } = useLoading(); // << GLOBAL LOADER
+  const { setLoading } = useLoading(); // GLOBAL LOADER
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);    // show global loader
+        setLoading(true);
 
-        const resRestaurant = await fetch(`http://localhost:5000/api/restaurants/${id}`);
+        const resRestaurant = await fetch(`${BACKEND_URL}/api/restaurants/${id}`);
+        if (!resRestaurant.ok) throw new Error("Failed to fetch restaurant");
         const restaurantData = await resRestaurant.json();
 
-        const resMenus = await fetch(`http://localhost:5000/api/restaurants/${id}/menus`);
+        const resMenus = await fetch(`${BACKEND_URL}/api/restaurants/${id}/menus`);
+        if (!resMenus.ok) throw new Error("Failed to fetch menus");
         const menuData = await resMenus.json();
 
         setRestaurant(restaurantData);
@@ -32,9 +35,8 @@ const RestaurantMenuPage = () => {
 
       } catch (err) {
         console.error("Error fetching data:", err);
-
       } finally {
-        setLoading(false);   // hide global loader
+        setLoading(false);
       }
     };
 
@@ -74,14 +76,11 @@ const RestaurantMenuPage = () => {
           <div className="menu-grid">
             {menus.map(item => (
               <div className="menu-card" key={item._id}>
-                <img src={item.image} alt={item.name}/>
+                <img src={item.image} alt={item.name} />
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
                 <p>₦{item.price.toLocaleString()}</p>
-
-                <button onClick={() => handleAddToCart(item)}>
-                  Add to Cart
-                </button>
+                <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
               </div>
             ))}
           </div>
