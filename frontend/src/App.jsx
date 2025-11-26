@@ -35,6 +35,8 @@ import "react-toastify/dist/ReactToastify.css";
 import RestaurantMenuPage from './pages/RestaurantMenuPage/RestaurantMenuPage';
 import CartPage from './pages/CartPage/CartPage';
 import { CartProvider } from './Context/CartContext';
+import { LoadingProvider } from './Context/LoadingContext/LoadingContext'
+import GlobalLoader from './components/GlobalLoader/GlobalLoader';
 
 function AppContent() {
   const location = useLocation();
@@ -65,39 +67,40 @@ function AppContent() {
 
   return (
     <CartProvider>
-        {renderNavbar()}
+      <GlobalLoader />
+      {renderNavbar()}
 
-        <main>
+      <main>
 
-          <Routes>
-            <Route path="/" element={<Home />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-            <Route path="/partner-with-us" element={<PartnerLayout />}>
-              <Route index element={<PartnerWithUs />} />
+          <Route path="/partner-with-us" element={<PartnerLayout />}>
+            <Route index element={<PartnerWithUs />} />
 
-            </Route>
-            <Route path="/partner/dashboard" element={<Dashboard />} />
+          </Route>
+          <Route path="/partner/dashboard" element={<Dashboard />} />
 
-            {/* <Route path="/become-a-courier" element={<BecomeACourier />} /> */}
-            {/* <Route path="/courier-register" element={<CourierRegister />} /> */}
+          {/* <Route path="/become-a-courier" element={<BecomeACourier />} /> */}
+          {/* <Route path="/courier-register" element={<CourierRegister />} /> */}
 
-            <Route path="/cart" element={<CartPage />} />
+          <Route path="/cart" element={<CartPage />} />
 
-            <Route path="/login" element={<PartnerAuth />} />
-            <Route path="/forgot-password" element={<PartnerForgotPassword />} />
-            <Route path="/signup" element={<PartnerAuth />} />
-            <Route path='/uploadform' element={<UploadForm />} />
-            <Route path='/restaurants' element={<RestaurantsPage />} />
-            <Route path='/restaurants/:id' element={<RestaurantMenuPage />} />
-          </Routes>
+          <Route path="/login" element={<PartnerAuth />} />
+          <Route path="/forgot-password" element={<PartnerForgotPassword />} />
+          <Route path="/signup" element={<PartnerAuth />} />
+          <Route path='/uploadform' element={<UploadForm />} />
+          <Route path='/restaurants' element={<RestaurantsPage />} />
+          <Route path='/restaurants/:id' element={<RestaurantMenuPage />} />
+        </Routes>
 
-        </main>
+      </main>
 
-        {renderFooter()}
+      {renderFooter()}
 
-        <BackToTop />
+      <BackToTop />
 
-        <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} />
     </CartProvider>
   );
 }
@@ -105,7 +108,9 @@ function AppContent() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppContent />
+      <LoadingProvider>
+        <AppContent />
+      </LoadingProvider>
     </BrowserRouter>
   );
 }

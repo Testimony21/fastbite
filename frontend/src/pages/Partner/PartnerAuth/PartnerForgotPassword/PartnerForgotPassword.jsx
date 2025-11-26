@@ -89,9 +89,9 @@ export default function PartnerForgotPassword() {
           )}
 
           <div className="signup-footer">
-            <h4>Don't have an account?</h4>
+            <h4>Don't have an account yet?</h4>
             <button className="signup-btn" onClick={() => navigate("/signup")}>
-              Sign up
+              Create Account
             </button>
           </div>
         </div>

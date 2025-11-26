@@ -3,17 +3,12 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 import { CartContext } from "../../Context/CartContext";
 import { toast } from "react-toastify";
+import { useLoading } from "../../Context/LoadingContext/LoadingContext";
 import "./Navbar.css";
 
 const defaultHomeLinks = [
-  // { label: "Become a courier", path: "/become-a-courier" },
   { label: "Partner with us", path: "/partner-with-us" },
   { label: "Log in", path: "/login" },
-];
-
-const becomeLinks = [
-  // { label: "Inside track", path: "/become-a-courier#inside-track" },
-  // { label: "Apply now", path: "/courier-register" },
 ];
 
 const partnerLinksGuest = [
@@ -29,20 +24,18 @@ const partnerLinksUser = [
 export default function Navbar({ overrideLinks, minimal = false }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { setLoading } = useLoading();
   const path = location.pathname.toLowerCase();
 
   const [hasScrolled, setHasScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
-
-  // ✅ Use cart context properly inside component
   const { cart } = useContext(CartContext);
 
   const showCart =
-    location.pathname.startsWith("/restaurants/") ||
-    location.pathname === "/cart";
+    location.pathname.startsWith("/restaurants/") || location.pathname === "/cart";
 
-  // ✅ Load user info
+  // Load user info
   useEffect(() => {
     try {
       const stored = localStorage.getItem("userInfo");
@@ -53,7 +46,7 @@ export default function Navbar({ overrideLinks, minimal = false }) {
     }
   }, [location.pathname]);
 
-  // ✅ Handle scroll
+  // Handle scroll
   useEffect(() => {
     const handleScroll = () => setHasScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
@@ -61,35 +54,32 @@ export default function Navbar({ overrideLinks, minimal = false }) {
   }, []);
 
   const handleSignOut = () => {
-  toast.info(
-    <div className="signout-toast">
-      <p>Are you sure you want to sign out?</p>
-      <div className="toast-buttons">
-        <button
-          className="toast-btn toast-ok"
-          onClick={() => {
-            localStorage.removeItem("userInfo");
-            setUserInfo(null);
-            toast.dismiss();
-            toast.success("Signed out successfully!");
-            navigate("/");
-          }}
-        >
-          Okay
-        </button>
-      </div>
-    </div>,
-    { autoClose: false, icon: false }
-  );
-};
+    toast.info(
+      <div className="signout-toast">
+        <p>Are you sure you want to sign out?</p>
+        <div className="toast-buttons">
+          <button
+            className="toast-btn toast-ok"
+            onClick={() => {
+              localStorage.removeItem("userInfo");
+              setUserInfo(null);
+              toast.dismiss();
+              toast.success("Signed out successfully!");
+              navigate("/");
+            }}
+          >
+            Okay
+          </button>
+        </div>
+      </div>,
+      { autoClose: false, icon: false }
+    );
+  };
 
-  // ✅ Determine links
+  // Determine links
   let links = defaultHomeLinks;
   let navType = "home";
 
-  // if (path.startsWith("/become-a-courier")) {
-  //   links = becomeLinks;
-  //   navType = "become";
   if (path.startsWith("/partner-with-us")) {
     links =
       userInfo?.token && userInfo.role === "restaurant"
@@ -99,7 +89,6 @@ export default function Navbar({ overrideLinks, minimal = false }) {
   } else if (path === "/" || path === "/home") {
     links = userInfo?.token
       ? [
-          // { label: "Become a courier", path: "/become-a-courier" },
           { label: "Partner with us", path: "/partner-with-us" },
           { label: "Sign Out", action: handleSignOut },
         ]
@@ -109,7 +98,7 @@ export default function Navbar({ overrideLinks, minimal = false }) {
 
   if (overrideLinks && Array.isArray(overrideLinks)) links = overrideLinks;
 
-  // ✅ Minimal Navbar (used on restaurant pages)
+  // Minimal Navbar
   if (minimal) {
     return (
       <nav className="navbar minimal">
@@ -131,7 +120,15 @@ export default function Navbar({ overrideLinks, minimal = false }) {
     );
   }
 
-  // ✅ Full Navbar
+  // Full Navbar
+  const handleNavClick = async (link) => {
+    if (link.action) return link.action();
+    setLoading(true);
+    navigate(link.path);
+    setMenuOpen(false);
+    setTimeout(() => setLoading(false), 300); // simulate loading
+  };
+
   return (
     <nav className={`navbar ${navType} ${hasScrolled ? "scrolled" : ""}`}>
       <div className="nav-left">
@@ -147,20 +144,16 @@ export default function Navbar({ overrideLinks, minimal = false }) {
       <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
         {links.map((l, i) => (
           <li key={i}>
-            {l.action ? (
-              <NavLink onClick={l.action} className="signout-btn">
-                {l.label}
-              </NavLink>
-            ) : (
-              <NavLink
-                to={l.path}
-                className={({ isActive }) => (isActive ? "active" : "")}
-                end={l.path === "/"}
-                onClick={() => setMenuOpen(false)}
-              >
-                {l.label}
-              </NavLink>
-            )}
+            <NavLink
+              to={l.path || "#"}
+              onClick={() => handleNavClick(l)}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? "active" : ""}`
+              }
+              end={l.path === "/"}
+            >
+              {l.label}
+            </NavLink>
           </li>
         ))}
       </ul>

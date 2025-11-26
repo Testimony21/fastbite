@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./RestaurantsPage.css";
-import RestaurantList from "../../components/RestaurantList/RestaurantList";
+import { useLoading } from "../../Context/LoadingContext/LoadingContext";
 
 const RestaurantsPage = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const { setLoading } = useLoading(); // <-- use global loader
   const params = new URLSearchParams(window.location.search);
   const location = params.get("location") || "";
 
   useEffect(() => {
-
     const fetchRestaurants = async () => {
       try {
-        setLoading(true);
+        setLoading(true); // show loader
+
         const res = await fetch(
           `http://localhost:5000/api/restaurants/search?location=${location}`
         );
@@ -26,21 +26,18 @@ const RestaurantsPage = () => {
       } catch (err) {
         setError(err.message);
       } finally {
-        setLoading(false);
+        setLoading(false); // hide loader once data is ready
       }
     };
 
     if (location) fetchRestaurants();
-  }, [location]);
+  }, [location, setLoading]);
 
-  if (loading) return <p className="loading">Loading restaurants...</p>;
   if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="restaurants-page">
-      <h1 className="page-title">
-        Restaurants in {location || "your area"}
-      </h1>
+      <h1 className="page-title">Restaurants in {location || "your area"}</h1>
 
       {restaurants.length === 0 ? (
         <p>No restaurants found.</p>
@@ -49,19 +46,12 @@ const RestaurantsPage = () => {
           {restaurants.map((r) => (
             <li key={r._id} className="restaurant-card">
               <Link to={`/restaurants/${r._id}`} className="restaurant-link">
-                {r.image && (
-                  <img
-                    src={r.image}
-                    alt={r.name}
-                    className="restaurant-img"
-                  />
-                )}
-                </Link>
-                <h2 className="restaurant-name">{r.name}</h2>
-                <p className="restaurant-location">{r.location}</p>
-                <p className="restaurant-cuisine">Cuisine: {r.cuisine}</p>
-                <p className="restaurant-rating">Rating: ⭐ {r.rating}</p>
-              
+                {r.image && <img src={r.image} alt={r.name} className="restaurant-img" />}
+              </Link>
+              <h2 className="restaurant-name">{r.name}</h2>
+              <p className="restaurant-location">{r.location}</p>
+              <p className="restaurant-cuisine">Cuisine: {r.cuisine}</p>
+              <p className="restaurant-rating">Rating: ⭐ {r.rating}</p>
             </li>
           ))}
         </ul>

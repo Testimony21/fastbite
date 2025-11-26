@@ -1,8 +1,9 @@
 .hero {
   width: 100%;
-  height: 100dvh;
-  overflow: hidden;
+  height: 100vh;
   position: relative;
+  overflow: visible;
+  /* important to allow dropdown outside hero */
 }
 
 .hero img {
@@ -12,129 +13,117 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  user-select: none;
   position: absolute;
   transform: scale(1.05);
-  will-change: opacity, transform;
   transition: opacity 1.5s ease-in-out, transform 2s ease-in-out;
 }
 
 .hero img.active {
   opacity: 1;
-  z-index: 1;
   transform: scale(1);
 }
 
-.hero .hero-content {
+.hero-content {
   z-index: 2;
   width: 100%;
   height: 100%;
   display: flex;
-  color: white;
-  position: relative;
-  padding-inline: 60px;
-  pointer-events: auto;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: center;
+  align-items: flex-start;
+  color: white;
+  padding-inline: 50px;
   background: rgba(0, 0, 0, 0.4);
 }
 
-.hero .hero-content h1 {
+.hero-content h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: bold;
-  padding-left: 7px;
   margin-bottom: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.hero .hero-content h2 {
+.hero-content h2 {
   font-size: 25px;
   font-weight: bold;
   margin-bottom: 40px;
-  padding-left: 7px;
 }
 
 .search-container {
   display: flex;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 5px;
-  padding-left: 7px;
+  align-items: flex-start;
+  position: relative;
 }
 
 .location-input {
   position: relative;
-  display: flex;
-  align-items: center;
-  width: 350px;
+  width: 373px;
 }
 
 .location-input input {
-  padding: 12px 12px 12px 40px;
   width: 100%;
-  border: none;
+  padding: 10px 10px 10px 45px;
+  font-size: 15px;
   border-radius: 5px;
-  font-size: 16px;
+  border: none;
+  box-sizing: border-box;
 }
 
 .input-icon {
   position: absolute;
-  left: 12px;
-  color: #555;
-}
-
-.order-type {
-  position: relative;
-  width: 200px;
-}
-
-.order-type select {
-  width: 100%;
-  padding: 12px 40px 12px 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  appearance: none;
-  cursor: pointer;
-  background-color: white;
-  color: #333;
-}
-
-.dropdown-icon {
-  position: absolute;
-  right: 12px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none;
   color: #555;
+  pointer-events: none;
 }
 
 .search-btn {
-  padding: 12px 20px;
-  background-color: #ff5a00;
-  border: none;
-  color: white;
-  font-size: 16px;
+  padding: 11px 20px;
   border-radius: 5px;
+  border: none;
+  background-color: #ff5a00;
+  color: white;
+  font-size: 15px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  width: auto;
+}
+
+/* FULL DROPDOWN (appears on top of everything, not clipped) */
+.full-dropdown {
+  position: fixed;
+  /* detached from hero container */
+  top: 120px;
+  /* adjust based on where your input is */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  list-style: none;
+  z-index: 9999;
+  padding: 0;
+  margin: 0;
+  color: #333;
+}
+
+.full-dropdown li {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.full-dropdown li:hover {
+  background: #f2f2f2;
 }
 
 
-
-
-/* ==========================
-   Hero Section – True Responsiveness Fix
-   (Preserves desktop styling, removes overflow)
-========================== */
-
-/* Tablets and below */
 @media (max-width: 1024px) {
   .hero {
     width: 100%;
@@ -145,12 +134,12 @@
   .hero img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* ensures image covers entire hero */
+    object-fit: cover;
     object-position: center;
   }
 
   .hero .hero-content {
-    padding-inline: 30px;
+    padding-inline: 50px;
     align-items: flex-start;
     justify-content: center;
     max-width: 100%;
@@ -182,7 +171,6 @@
   }
 }
 
-/* Mobile (stronger rules for small screens) */
 @media (max-width: 600px) {
   .hero {
     width: 100%;
@@ -198,7 +186,7 @@
   }
 
   .hero .hero-content {
-    padding-inline: 20px;
+    padding-inline: 5px;
     align-items: flex-start;
     justify-content: center;
     max-width: 100%;
@@ -236,10 +224,9 @@
   }
 }
 
-/* Ultra small screens safety */
 @media (max-width: 360px) {
   .hero {
-    height: auto; /* allow content to flow naturally */
+    height: auto; 
     min-height: 100vh;
   }
 
@@ -252,7 +239,7 @@
     font-size: clamp(1.4rem, 5vw, 1.8rem);
   }
 }
-/* === Final Overflow Patch (Safe for all screen sizes) === */
+
 html, body {
   overflow-x: hidden;
 }
@@ -269,7 +256,6 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Prevent flex children from pushing beyond container */
 .search-container {
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -278,7 +264,6 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Fix for mobile Safari or Chrome rounding issues */
 @supports (-webkit-touch-callout: none) {
   body {
     position: relative;

@@ -1,7 +1,10 @@
 import React from "react";
 import "./RestaurantList.css";
 
-const RestaurantList = ({ restaurants = [] }) => {
+const RestaurantList = ({ restaurants = [], loading }) => {
+  // Don't show anything while loading
+  if (loading) return null;
+
   if (!Array.isArray(restaurants) || restaurants.length === 0) {
     return <p>No restaurants found.</p>;
   }
@@ -20,7 +23,5 @@ const RestaurantList = ({ restaurants = [] }) => {
     </div>
   );
 };
-
-
 
 export default RestaurantList;
