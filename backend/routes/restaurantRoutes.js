@@ -56,8 +56,16 @@ router.route("/:id")
 
 // ✅ New route: Get menus for a restaurant
 router.get("/:restaurantId/menus", async (req, res) => {
- const menus = await MenuItem.find({ restaurant: restaurantId });
-  res.json(menus);
+  try {
+    const { restaurantId } = req.params;
+
+    const menus = await MenuItem.find({ restaurant: restaurantId });
+
+    res.json(menus);
+  } catch (error) {
+    console.error("Error fetching menus:", error.message);
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 export default router;
