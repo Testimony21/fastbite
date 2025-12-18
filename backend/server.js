@@ -53,7 +53,8 @@ app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/restaurants", menuRoutes);
+// app.use("/api/restaurants/:id/menu", menuRoutes);
+// app.use("/api/menus", menuRoutes);
 
 // ✅ Error Middleware
 app.use(notFound);

@@ -6,8 +6,10 @@ import {
   updateRestaurant,
   deleteRestaurant,
 } from "../controllers/restaurantController.js";
+import { getMenusByRestaurant } from "../controllers/menuController.js";
 import { protect, adminOnly, restaurantOnly } from "../middleware/authMiddleware.js";
 import Restaurant from "../models/restaurant.js";
+import MenuItem from "../models/menuModel.js"; // ✅ import Menu model
 
 const router = express.Router();
 
@@ -17,7 +19,7 @@ router.get("/search", async (req, res) => {
     const { location, cuisine, page = 1, limit = 10, sortBy = "rating", order = "desc" } = req.query;
 
     const filters = {};
-    if (location) filters.location = { $regex: location.trim(), $options: "i" }; // exact, case-insensitive
+    if (location) filters.location = { $regex: location.trim(), $options: "i" };
     if (cuisine) filters.cuisine = { $regex: cuisine, $options: "i" };
 
     const skip = (page - 1) * limit;
@@ -30,12 +32,11 @@ router.get("/search", async (req, res) => {
 
     const total = await Restaurant.countDocuments(filters);
 
-    // Remove the 404: always return an array
     res.json({
       total,
       page: Number(page),
       pages: Math.ceil(total / limit),
-      restaurants, // could be empty []
+      restaurants,
     });
   } catch (error) {
     console.error("Error fetching restaurants:", error.message);
@@ -52,5 +53,11 @@ router.route("/:id")
   .get(getRestaurantById)
   .put(protect, restaurantOnly, updateRestaurant)
   .delete(protect, adminOnly, deleteRestaurant);
+
+// ✅ New route: Get menus for a restaurant
+router.get("/:restaurantId/menus", async (req, res) => {
+ const menus = await MenuItem.find({ restaurant: restaurantId });
+  res.json(menus);
+});
 
 export default router;
