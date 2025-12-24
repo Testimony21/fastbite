@@ -91,7 +91,7 @@ function AppContent() {
           <Route path="/signup" element={<PartnerAuth />} />
           <Route path='/uploadform' element={<UploadForm />} />
           <Route path='/restaurants' element={<RestaurantsPage />} />
-          <Route path='/restaurants/:id' element={<RestaurantMenuPage />} />
+          <Route path='/restaurants/:restaurantId' element={<RestaurantMenuPage />} />
         </Routes>
 
       </main>

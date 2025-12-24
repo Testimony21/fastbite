@@ -1,5 +1,18 @@
+/* Ensure the root container fills viewport */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Let main content grow to push global footer down */
+.content-wrap {
+  flex: 1;
+}
+
 .restaurants-page {
-  padding: 100px 32px; /* account for fixed navbar */
+  padding: 100px 32px;
+  /* account for fixed navbar */
   max-width: 1200px;
   margin: auto;
 }
@@ -15,42 +28,63 @@
 /* Make the cards display in rows */
 .restaurants-list {
   display: flex;
-  flex-wrap: wrap; /* allows wrapping to next line */
-  gap: 20px; /* space between cards */
+  flex-wrap: wrap;
+  /* allows wrapping to next line */
+  gap: 20px;
+  /* space between cards */
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-content: space-between; /* distribute cards evenly */
+  justify-content: space-between;
+  /* distribute cards evenly */
+}
+
+.restaurant-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .restaurant-card {
-  flex: 1 1 calc(25% - 20px); /* 4 cards per row */
+  flex: 1 1 calc(25% - 20px);
+  /* 4 cards per row */
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease;
   box-sizing: border-box;
+  position: relative;
 }
 
 .restaurant-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-.restaurant-img {
+/* .restaurant-img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
+} */
+
+.restaurant-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* margin-bottom: 15px; */
 }
 
 .restaurant-name {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin: 10px 0px;
   color: #333;
 }
 
@@ -66,15 +100,67 @@
   font-weight: 600;
 }
 
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* .image-wrapper:hover .overlay {
+  opacity: 1;
+} */
+
+.restaurant-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* full image size */
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  pointer-events: none; /* so clicks pass through to the Link */
+}
+
+.restaurant-card:hover .overlay {
+  opacity: 1;
+}
 
 @media (max-width: 768px) {
   .restaurant-card {
-    flex: 1 1 calc(50% - 20px); /* 2 per row on tablets */
+    flex: 1 1 calc(50% - 20px);
+    /* 2 per row on tablets */
   }
 }
 
 @media (max-width: 480px) {
   .restaurant-card {
-    flex: 1 1 100%; /* full width on phones */
+    flex: 1 1 100%;
+    /* full width on phones */
   }
 }

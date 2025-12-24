@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { set } from "mongoose";
 
 export const CartContext = createContext();
 
@@ -9,7 +8,7 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   const getToken = () => {
     const userData = localStorage.getItem("userInfo");
