@@ -1,77 +1,74 @@
 // scripts/duplicateRestaurantsAndMenus.js
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 import Restaurant from "../models/restaurant.js";
 import MenuItem from "../models/menuModel.js";
 
-// List of all target cities
+dotenv.config();
+
 const cities = [
-  "Umuahia", "Yola", "Uyo", "Awka", "Bauchi", "Yenegua", "Makurdi", "Maiduguri",
+  "Yola", "Uyo", "Awka", "Bauchi", "Yenegua", "Makurdi", "Maiduguri",
   "Calabar", "Asaba", "Abakiliki", "Benin City", "Ado Ekiti", "Enugu", "Gombe",
   "Owerri", "Dutse", "Kaduna", "Kano", "Katsina", "Birnin Kebbi", "Lokoja",
   "Ilorin", "Ikeja", "Lafia", "Minna", "Abeokuta", "Akure", "Osogbo", "Ibadan",
-  "Jos", "Port Harcourt", "Sokoto", "Jalingo", "Damaturu", "Dutse", "Abuja"
+  "Jos", "Port Harcourt", "Sokoto", "Jalingo", "Damaturu", "Abuja"
 ];
 
-// Source city
 const SOURCE_CITY = "Umuahia";
 
 async function main() {
   try {
-    await mongoose.connect(
-      "mongodb+srv://testimonyokochac:zqZ3Kr5v9qBdX8in@cluster0.vcxwqw9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-    );
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log("✅ Connected to MongoDB");
 
-    // Step 1: Get all restaurants from Umuahia
-    const baseRestaurants = await Restaurant.find({ location: SOURCE_CITY }).lean();
+    const baseRestaurants = await Restaurant.find({ location: SOURCE_CITY });
     if (!baseRestaurants.length) {
       console.log(`❌ No restaurants found in ${SOURCE_CITY}`);
       process.exit(1);
     }
-    console.log(`📌 Found ${baseRestaurants.length} restaurants in ${SOURCE_CITY}`);
 
-    // Step 2: Duplicate to other cities
+    console.log(`📌 Found ${baseRestaurants.length} base restaurants`);
+
     for (const city of cities) {
-      if (city === SOURCE_CITY) continue; // skip Umuahia itself
-
-      // Skip city if it already has restaurants
-      const existingCount = await Restaurant.countDocuments({ location: city });
-      if (existingCount > 0) {
-        console.log(`⏭️  Skipping ${city} (already has ${existingCount} restaurants)`);
+      const exists = await Restaurant.countDocuments({ location: city });
+      if (exists > 0) {
+        console.log(`⏭️ Skipping ${city}`);
         continue;
       }
 
-      for (const rest of baseRestaurants) {
-        const newRest = await Restaurant.create({
-          ...rest,
-          _id: undefined,      // new MongoDB ID
-          location: city,      // assign new city
-          name: rest.name,     // keep original name
-          createdAt: new Date(),
-          updatedAt: new Date(),
+      for (const base of baseRestaurants) {
+        const newRestaurant = await Restaurant.create({
+          name: base.name,
+          image: base.image,
+          cuisine: base.cuisine,
+          rating: base.rating,
+          location: city, // ONLY source of truth
         });
 
-        // Duplicate menus for the new restaurant
-        const menus = await MenuItem.find({ restaurant: rest._id }).lean();
+        const menus = await MenuItem.find({ restaurant: base._id });
+
         const newMenus = menus.map(menu => ({
-          ...menu,
-          _id: undefined,
-          restaurant: newRest._id,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          name: menu.name,
+          description: menu.description,
+          price: menu.price,
+          image: menu.image,
+          restaurant: newRestaurant._id,
         }));
 
-        if (newMenus.length) await MenuItem.insertMany(newMenus);
+        if (newMenus.length) {
+          await MenuItem.insertMany(newMenus);
+        }
       }
 
-      console.log(`✅ Duplicated restaurants + menus for ${city}`);
+      console.log(`✅ ${city} duplicated correctly`);
     }
 
-    console.log("🎉 DONE!");
+    console.log("🎉 DONE — clean data only");
     await mongoose.disconnect();
     process.exit(0);
-  } catch (error) {
-    console.error(error);
+
+  } catch (err) {
+    console.error("❌ Error:", err);
     process.exit(1);
   }
 }
