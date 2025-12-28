@@ -1,0 +1,50 @@
+.checkout-page {
+  max-width: 800px;
+  margin: 5rem auto;
+  padding: 2rem;
+}
+
+.checkout-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.empty-checkout {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.checkout-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 1rem;
+}
+
+.checkout-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.checkout-btn {
+  background-color: #2fff2f;
+  color: white;
+  border: none;
+  padding: 0.7rem 0.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.checkout-btn:hover {
+  background-color: green;
+}

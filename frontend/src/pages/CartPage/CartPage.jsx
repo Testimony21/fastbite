@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "../../Context/CartContext";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./CartPage.css";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const {
@@ -23,6 +24,7 @@ const CartPage = () => {
   }, []);
 
   const items = cart?.items || [];
+  const navigate = useNavigate();
 
   const handleUpdateQuantity = async (productId, type) => {
     setActionLoading(true);
@@ -142,7 +144,11 @@ const CartPage = () => {
                   .reduce((total, item) => total + item.price * item.quantity, 0)
                   .toLocaleString()}
               </h3>
-              <button className="checkout-btn" disabled={actionLoading}>
+              <button
+                className="checkout-btn"
+                disabled={actionLoading}
+                onClick={() => navigate("/checkout")}
+              >
                 Proceed to Checkout
               </button>
             </div>

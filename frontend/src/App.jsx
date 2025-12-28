@@ -37,19 +37,22 @@ import CartPage from './pages/CartPage/CartPage';
 import { CartProvider } from './Context/CartContext';
 import { LoadingProvider } from './Context/LoadingContext/LoadingContext'
 import GlobalLoader from './components/GlobalLoader/GlobalLoader';
+import Checkout from './pages/Checkout/Checkout';
+import FakePayment from './pages/FakePayment';
+import OrderSuccess from './pages/OrderSuccess';
 
 function AppContent() {
   const location = useLocation();
 
   // Pages with NO footer
-  const noFooterRoutes = ["/login", "/forgot-password", "/signup", "/become-a-courier", "/courier-register"];
+  const noFooterRoutes = ["/login", "/forgot-password", "/signup", "/become-a-courier", "/courier-register", "/fake-payment", "/checkout", "/order-success", "/cart"];
 
   const partnerRoutes = ["/partner-with-us"];
 
   const partnerFooterRoutes = ["/corporate-ordering"];
 
   const renderNavbar = () => {
-    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants" || location.pathname === "/courier-register" || location.pathname.startsWith("/restaurants/") || location.pathname === "/cart") {
+    if (location.pathname === "/login" || location.pathname === "/forgot-password" || location.pathname === "/signup" || location.pathname === "/partner/dashboard" || location.pathname === "/restaurants" || location.pathname === "/courier-register" || location.pathname.startsWith("/restaurants/") || location.pathname === "/cart" || location.pathname === "/checkout" || location.pathname === "/fake-payment" || location.pathname === "/order-success") {
       return <Navbar minimal />;
     }
     if (partnerRoutes.includes(location.pathname)) {
@@ -92,6 +95,9 @@ function AppContent() {
           <Route path='/uploadform' element={<UploadForm />} />
           <Route path='/restaurants' element={<RestaurantsPage />} />
           <Route path='/restaurants/:restaurantId' element={<RestaurantMenuPage />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/fake-payment" element={<FakePayment amount={5000} />} />
+          <Route path="/order-success" element={<OrderSuccess />} />
         </Routes>
 
       </main>

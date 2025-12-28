@@ -121,7 +121,10 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchCart();
+    const token = getToken();
+    if (token) {
+       fetchCart();
+    }
   }, []);
 
   return (

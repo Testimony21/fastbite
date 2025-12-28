@@ -5,13 +5,16 @@ import sampleImage from "../../../assets/Images/fastbite-image2.jpg";
 import axios from "axios";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import { useCart } from "../../../Context/CartContext";
 
 export default function PartnerAuth() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { fetchCart } = useCart();
 
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -45,15 +48,15 @@ export default function PartnerAuth() {
     // Build request data
     const formData = isLogin
       ? {
-          email: form.email,
-          password: form.password,
-        }
+        email: form.email,
+        password: form.password,
+      }
       : {
-          name: form.name,
-          email: form.email,
-          password: form.password,
-          role: form.role,
-        };
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        role: form.role,
+      };
 
     try {
       setLoading(true); // ✅ show spinner
@@ -64,7 +67,11 @@ export default function PartnerAuth() {
       // Save user info to localStorage
       localStorage.setItem("userInfo", JSON.stringify(data));
 
+      // 🔥 sync cart immediately after login
+      fetchCart();
+
       toast.success(isLogin ? "Login successful!" : "Account created successfully!");
+
 
       // Redirect based on role
       if (data.role === "restaurant") {
