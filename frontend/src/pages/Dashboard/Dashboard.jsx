@@ -1,6 +1,7 @@
 import React from "react";
 import AddRestaurant from "../../components/RestaurantCard/AddRestaurant";
-import "./Dashboard.css"; // styled version
+import DashboardOverlay from "./DashboardOverlay";
+import "./Dashboard.css"; 
 
 export default function Dashboard() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -14,6 +15,7 @@ export default function Dashboard() {
   }
 
   return (
+    <>
     <div className="dashboard">
       {/* Sidebar */}
       <aside className="sidebar">
@@ -28,16 +30,20 @@ export default function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <main className="main">
+      <main className="main main-wrapper">
         <h2 className="welcome">Welcome, {userInfo.name} 👋</h2>
         <p className="subtitle">Manage your restaurants here.</p>
 
         {/* Add Restaurant Form */}
-        <section className="add-restaurant">
+        {/* <section className="add-restaurant">
           <h3>Add a New Restaurant</h3>
           <AddRestaurant />
-        </section>
+        </section> */}
+
+        
       </main>
     </div>
+    <DashboardOverlay />
+    </>
   );
 }
