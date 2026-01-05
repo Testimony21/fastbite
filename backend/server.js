@@ -11,6 +11,7 @@ import uploadRoutes from "./routes/upload.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import menuRoutes from "./routes/menuRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
@@ -53,7 +54,8 @@ app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/users", userRoutes);
-// app.use("/api/restaurants/:id/menu", menuRoutes);
+app.use("/api/payments", paymentRoutes);
+
 // app.use("/api/menus", menuRoutes);
 
 // ✅ Error Middleware
