@@ -25,7 +25,7 @@ export default function DashboardOverlay() {
           className="overlay-back-btn"
           onClick={() => navigate("/partner-with-us")}
         >
-          <FaArrowLeft className="back-icon" /> Back to Partner Page
+          <FaArrowLeft className="back-icon" /> Back to Partner Pagecd
         </button>
       </div>
     </div>
