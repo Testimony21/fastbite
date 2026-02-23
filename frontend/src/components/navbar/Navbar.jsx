@@ -5,6 +5,7 @@ import { CartContext } from "../../Context/CartContext";
 import { toast } from "react-toastify";
 import { useLoading } from "../../Context/LoadingContext/LoadingContext";
 import "./Navbar.css";
+import logo from "../../assets/Images/main-fastbite-logo2.png";
 
 const defaultHomeLinks = [
   { label: "Partner with us", path: "/partner-with-us" },
@@ -104,7 +105,8 @@ export default function Navbar({ overrideLinks, minimal = false }) {
       <nav className="navbar minimal">
         <div className="nav-left">
           <NavLink to="/" className="logo">
-            FastBite
+            {/* FastBite */}
+            <img src={logo} alt="FastBite Logo" />
           </NavLink>
         </div>
 
@@ -133,7 +135,8 @@ export default function Navbar({ overrideLinks, minimal = false }) {
     <nav className={`navbar ${navType} ${hasScrolled ? "scrolled" : ""}`}>
       <div className="nav-left">
         <NavLink to="/" className="logo">
-          FastBite
+          {/* FastBite */}
+          <img src={logo} alt="FastBite Logo" />
         </NavLink>
       </div>
 

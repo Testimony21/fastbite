@@ -12,10 +12,12 @@
   z-index: 1000;
 }
 
-.logo {
-  font-size: 24px;
+.logo img{
+  display: block;
+  /* margin-right: 160px; */
   font-weight: bold;
   text-decoration: none;
+  width: 130px;
 }
 
 .nav-links {
@@ -31,6 +33,10 @@
 /* --- Home Navbar --- */
 .navbar.home .logo {
   color: white;
+}
+
+.nav-left {
+  margin-left: -35px; /* adjust as needed */
 }
 
 .navbar.home .nav-links li a,

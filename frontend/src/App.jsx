@@ -40,6 +40,7 @@ import GlobalLoader from './components/GlobalLoader/GlobalLoader';
 import Checkout from './pages/Checkout/Checkout';
 import FakePayment from './pages/FakePayment';
 import OrderSuccess from './pages/OrderSuccess';
+import PartnerRoutes from './pages/routes/PartnerRoutes/PartnerRoutes';
 
 function AppContent() {
   const location = useLocation();
@@ -82,7 +83,7 @@ function AppContent() {
             <Route index element={<PartnerWithUs />} />
 
           </Route>
-          <Route path="/partner/dashboard" element={<Dashboard />} />
+          {/* <Route path="/partner/dashboard" element={<Dashboard />} /> */}
 
           {/* <Route path="/become-a-courier" element={<BecomeACourier />} /> */}
           {/* <Route path="/courier-register" element={<CourierRegister />} /> */}
@@ -98,7 +99,14 @@ function AppContent() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/fake-payment" element={<FakePayment amount={5000} />} />
           <Route path="/order-success" element={<OrderSuccess />} />
-        </Routes>
+          <Route
+            path='/partner/dashboard'
+            element={
+              <PartnerRoutes> <Dashboard /> </PartnerRoutes>
+            }
+          />
+        </ Routes>
+
 
       </main>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import AddRestaurant from "../../components/RestaurantCard/AddRestaurant";
-import DashboardOverlay from "./DashboardOverlay";
+// import DashboardOverlay from "./DashboardOverlay";
 import "./Dashboard.css"; 
 
 export default function Dashboard() {

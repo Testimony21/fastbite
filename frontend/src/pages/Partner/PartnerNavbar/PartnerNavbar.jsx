@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../../../assets/Images/main-fastbite-logo2.png";
 import "./PartnerNavbar.css";
 
 const PartnerNavbar = ({ onGetStartedClick }) => {
@@ -32,7 +33,9 @@ const PartnerNavbar = ({ onGetStartedClick }) => {
   return (
     <nav className={`partner-navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="logo">
-        <Link to="/" className="logo-link">FastBite</Link>
+        <Link to="/" className="logo-link">
+          <img src={logo} alt="FastBite Logo" />
+        </Link>
       </div>
 
       <div className="actions">
@@ -49,9 +52,9 @@ const PartnerNavbar = ({ onGetStartedClick }) => {
             </button>
           </>
         ) : (
-            <Link to="/login" className="login-btn">
-              <FaUser className="user-icon" /> Login
-            </Link>
+          <Link to="/login" className="login-btn">
+            <FaUser className="user-icon" /> Login
+          </Link>
         )}
 
       </div>

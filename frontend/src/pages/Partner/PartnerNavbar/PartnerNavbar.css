@@ -15,15 +15,18 @@
 }
 
 .logo-link {
-  font-size: 24px;
-  font-weight: bold;
   display: flex;
   align-items: center;
-  text-decoration: none;
-  color: #ff5a00;
-  line-height: 1;
   height: 100%;
   padding-top: 25px;
+}
+
+.logo img{
+  display: block;
+  /* margin-right: 160px; */
+  font-weight: bold;
+  text-decoration: none;
+  width: 130px;
 }
 
 /* .logo-link.scrolled {
