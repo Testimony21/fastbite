@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { FaBars, FaShoppingCart } from "react-icons/fa";
+import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import { CartContext } from "../../Context/CartContext";
 import { toast } from "react-toastify";
 import { useLoading } from "../../Context/LoadingContext/LoadingContext";
@@ -141,7 +141,7 @@ export default function Navbar({ overrideLinks, minimal = false }) {
       </div>
 
       <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
-        <FaBars />
+        {menuOpen ? <FaTimes /> : <FaBars />}
       </div>
 
       <ul className={`nav-links ${menuOpen ? "open" : ""}`}>

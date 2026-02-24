@@ -57,18 +57,18 @@
 
 
 /* Mobile responsiveness */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .partner-navbar {
-    padding: 0 20px;       /* reduce side padding for smaller screens */
-    height: 70px;          /* keep navbar height consistent */
+    padding: 0 20px;      
+    height: 70px;          
   }
 
   .logo-link {
-    font-size: 20px;       /* adjust font size */
-    padding: 0;            /* reset top padding */
-    height: 100%;          /* take full navbar height */
+    font-size: 20px;       
+    padding: 0;            
+    height: 100%;          
     display: flex;
-    align-items: center;   /* vertically center */
+    align-items: center;   
   }
 
   .actions {
@@ -76,14 +76,13 @@
   }
 
   .login-btn {
-    padding: 8px 12px;     /* add top & bottom padding */
+    padding: 8px 12px;     
     font-size: 14px;
     height: auto;
-    align-items: center;   /* vertical alignment */
+    align-items: center;   
   }
 }
 
-/* Extra small screens (phones) */
 @media (max-width: 480px) {
   .partner-navbar {
     padding: 0 15px;
@@ -97,4 +96,62 @@
     padding: 6px 10px;
     font-size: 13px;
   }
+} */
+
+
+@media (max-width: 900px) {
+
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  /* Show hamburger */
+  .menu-icon {
+    display: block;
+    font-size: 28px;
+    z-index: 1100;
+  }
+
+  /* Hide normal nav */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 75%;
+    background: #ffffff;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 30px 40px 30px;
+    gap: 25px;
+    transition: right 0.4s ease-in-out;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Slide in */
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links li a {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-links.open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 100vh;
+    background: rgba(0,0,0,0.2);
+  }
+
 }
