@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaTimes, FaBars } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/Images/main-fastbite-logo2.png";
 import "./PartnerNavbar.css";
 
 const PartnerNavbar = ({ onGetStartedClick }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
@@ -38,7 +39,11 @@ const PartnerNavbar = ({ onGetStartedClick }) => {
         </Link>
       </div>
 
-      <div className="actions">
+      <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </div>
+
+      <div className={`actions ${menuOpen ? "open" : ""}`}>
         {userInfo?.token ? (
           <>
             <Link to="/partner/dashboard" className="login-btn">
