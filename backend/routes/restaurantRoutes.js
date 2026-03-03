@@ -5,13 +5,18 @@ import {
   getRestaurantById,
   updateRestaurant,
   deleteRestaurant,
+  getMyRestaurants,
 } from "../controllers/restaurantController.js";
+import multer from "multer";
 import { getMenusByRestaurant } from "../controllers/menuController.js";
 import { protect, adminOnly, restaurantOnly } from "../middleware/authMiddleware.js";
 import Restaurant from "../models/restaurant.js";
 import MenuItem from "../models/menuModel.js"; // ✅ import Menu model
 
 const router = express.Router();
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 router.get("/search", async (req, res) => {
   try {
@@ -57,15 +62,9 @@ router.get("/search", async (req, res) => {
 });
 
 // 🍴 CRUD routes
-router.route("/")
-  .post(protect, restaurantOnly, createRestaurant)
-  .get(getRestaurants);
 
-router.route("/:id")
-  .get(getRestaurantById)
-  .put(protect, restaurantOnly, updateRestaurant)
-  .delete(protect, adminOnly, deleteRestaurant);
 
+router.get("/mine", protect, restaurantOnly, getMyRestaurants);
 // ✅ New route: Get menus for a restaurant
 router.get("/:restaurantId/menus", async (req, res) => {
   try {
@@ -79,5 +78,14 @@ router.get("/:restaurantId/menus", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+router.route("/")
+  .post(protect, restaurantOnly, upload.single("image"), createRestaurant)
+  .get(getRestaurants);
+
+router.route("/:id")
+  .get(getRestaurantById)
+  .put(protect, restaurantOnly, updateRestaurant)
+  .delete(protect, adminOnly, deleteRestaurant);
 
 export default router;

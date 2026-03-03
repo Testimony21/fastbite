@@ -56,7 +56,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/payments", paymentRoutes);
 
-// app.use("/api/menus", menuRoutes);
+app.use("/api/restaurants/:restaurantId/menus", menuRoutes);
 
 // ✅ Error Middleware
 app.use(notFound);

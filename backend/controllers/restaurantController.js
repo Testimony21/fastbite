@@ -10,8 +10,9 @@ export const createRestaurant = async (req, res) => {
     }
 
     const { name, description, address, location, phone, image, cuisine } = req.body;
+    const owner = req.user._id;
 
-    const restaurant = new Restaurant({
+    const newRestaurant = new Restaurant({
       name,
       description,
       address,
@@ -19,12 +20,17 @@ export const createRestaurant = async (req, res) => {
       image,
       location,
       cuisine,
-      owner: req.user.id, // from authMiddleware
+      owner: req.user._id,
     });
+if (req.file) {
+   newRestaurant.image = `/uploads/${req.file.originalname}`;
+}
+   
 
-    const savedRestaurant = await restaurant.save();
+    const savedRestaurant = await newRestaurant.save();
     res.status(201).json(savedRestaurant);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
@@ -97,5 +103,14 @@ export const deleteRestaurant = async (req, res) => {
     res.json({ message: "Restaurant deleted" });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+export const getMyRestaurants = async (req, res) => {
+  try {
+    const restaurants = await Restaurant.find({ owner: req.user.id });
+    res.json(restaurants);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
   }
 };
