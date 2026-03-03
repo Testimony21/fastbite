@@ -23,7 +23,7 @@
 
 .logo img{
   display: block;
-  /* margin-right: 160px; */
+  margin-left: -23px;
   font-weight: bold;
   text-decoration: none;
   width: 130px;
@@ -38,17 +38,30 @@
   gap: 1rem;
 }
 
-.login-btn {
+.dashboard-clk {
+  font-weight: 500;
+  padding: 10px 8px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.dashboard-clk:hover {
+  text-decoration: underline;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #000000;
+}
+
+.log-btn {
   display: flex;
   align-items: center;
-  /* gap: 35px; */
-  padding: 0;
+  padding: 8px 10px;
   margin: 0;
   font-size: 15px;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 20px;
+  border-radius: 18px;
   background: #ff5a00;
   color: white;
   gap: 5px;
@@ -118,7 +131,7 @@
     right: -100%;
     height: 100vh;
     width: 75%;
-    background: #fff;
+    background: #ffffff;
     flex-direction: column;
     align-items: flex-start;
     padding: 100px 30px;
@@ -131,9 +144,12 @@
     right: 0;
   }
 
-  .login-btn {
-    width: 100%;
+  .log-btn {
+    width: fit-content;
     text-align: left;
+    margin-left: 7px;
+    bottom: 0;
+    /* top: 0%; */
   }
 
 }

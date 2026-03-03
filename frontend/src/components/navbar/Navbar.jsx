@@ -5,7 +5,8 @@ import { CartContext } from "../../Context/CartContext";
 import { toast } from "react-toastify";
 import { useLoading } from "../../Context/LoadingContext/LoadingContext";
 import "./Navbar.css";
-import logo from "../../assets/Images/main-fastbite-logo2.png";
+// import logo from "../../assets/Images/main-fastbite-logo2.png";
+import logo from "../../assets/Images/new-logo.png";
 
 const defaultHomeLinks = [
   { label: "Partner with us", path: "/partner-with-us" },

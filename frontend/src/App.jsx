@@ -27,7 +27,7 @@ import PartnerLayout from './pages/Partner/PartnerLayout/PartnerLayout';
 // import BecomeRequirements from './pages/BecomeACourier/BecomeRequirements/BecomeRequirements';
 // import BecomeQuestions from './pages/BecomeACourier/BecomeQuestions/BecomeQuestions';
 import UploadForm from './pages/Partner/UploadForm/UploadForm';
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Partner/Dashboard/Dashboard";
 import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -41,6 +41,8 @@ import Checkout from './pages/Checkout/Checkout';
 import FakePayment from './pages/FakePayment';
 import OrderSuccess from './pages/OrderSuccess';
 import PartnerRoutes from './pages/routes/PartnerRoutes/PartnerRoutes';
+import AddRestaurant from './pages/Partner/Dashboard/AddRestaurant/AddRestaurant';
+import MyRestaurants from './pages/Partner/Dashboard/MyRestaurants';
 
 function AppContent() {
   const location = useLocation();
@@ -99,12 +101,11 @@ function AppContent() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/fake-payment" element={<FakePayment amount={5000} />} />
           <Route path="/order-success" element={<OrderSuccess />} />
-          <Route
-            path='/partner/dashboard'
-            element={
-              <PartnerRoutes> <Dashboard /> </PartnerRoutes>
-            }
-          />
+          <Route path='/partner/dashboard' element={<PartnerRoutes><Dashboard /></PartnerRoutes>}>
+            <Route path="add" element={<AddRestaurant />} />
+            <Route path='restaurants' element={<MyRestaurants />} />
+            {/* <Route path='orders' element={<Orders />} /> */}
+          </Route>
         </ Routes>
 
 

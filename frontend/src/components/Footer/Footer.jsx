@@ -1,35 +1,79 @@
-// Footer.jsx
-import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import React, { useState } from "react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
+import logo from "../../assets/Images/new-logo.png";
 import "./Footer.css";
 
-const PartnerFooter = () => {
-  return (
-    <footer>
-      {/* Left Links */}
-      <div className="partner-footer-left">
-        <a href="/about">About Us</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/cookies">Cookie Policy</a>
-      </div>
+export default function Footer() {
+  const [openSections, setOpenSections] = useState({});
 
-      {/* Right Social Icons */}
-      <div className="partner-footer-right">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-          <FaFacebookF />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          <FaTwitter />
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-          <FaInstagram />
-        </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-          <FaLinkedinIn />
-        </a>
+  const toggleSection = (key) => {
+    setOpenSections((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  return (
+    <footer className="footer">
+      <div className="footer-glass">
+
+        {/* BRAND */}
+        <div className="footer-brand">
+          <img src={logo} alt="FastBite Logo" className="footer-logo" />
+          <p>Fast delivery. Fresh meals. Trusted restaurants.</p>
+        </div>
+
+        {/* GRID COLUMNS */}
+        <div className="footer-grid">
+
+          {/* COMPANY */}
+          <div className="footer-col">
+            <h4 onClick={() => toggleSection("company")}>Company</h4>
+            <div className={`col-links ${openSections.company ? "open" : ""}`}>
+              <a href="#">About</a>
+              <a href="#">Careers</a>
+              <a href="#">Blog</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+
+          {/* SUPPORT */}
+          <div className="footer-col">
+            <h4 onClick={() => toggleSection("support")}>Support</h4>
+            <div className={`col-links ${openSections.support ? "open" : ""}`}>
+              <a href="#">Help Center</a>
+              <a href="#">Safety</a>
+              <a href="#">Terms</a>
+              <a href="#">Privacy</a>
+            </div>
+          </div>
+
+          {/* PARTNERS */}
+          <div className="footer-col">
+            <h4 onClick={() => toggleSection("partners")}>Partners</h4>
+            <div className={`col-links ${openSections.partners ? "open" : ""}`}>
+              <a href="#">Add Restaurant</a>
+              <a href="#">Partner Support</a>
+              <a href="#">Partner Login</a>
+            </div>
+          </div>
+
+        </div>
+
+        {/* BOTTOM */}
+        <div className="footer-bottom">
+          <div className="socials">
+            <a href="#"><FaFacebookF /></a>
+            <a href="#"><FaTwitter /></a>
+            <a href="#"><FaInstagram /></a>
+            <a href="#"><FaLinkedinIn /></a>
+          </div>
+          <p>© {new Date().getFullYear()} FastBite. All rights reserved.</p>
+        </div>
+
       </div>
     </footer>
   );
-};
-
-export default PartnerFooter;
+}

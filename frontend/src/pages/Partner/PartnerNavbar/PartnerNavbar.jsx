@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaUser, FaTimes, FaBars } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../../assets/Images/main-fastbite-logo2.png";
+// import logo from "../../../assets/Images/main-fastbite-logo2.png";
+import logo from "../../../assets/Images/new-logo.png";
 import "./PartnerNavbar.css";
 
 const PartnerNavbar = ({ onGetStartedClick }) => {
@@ -46,18 +47,18 @@ const PartnerNavbar = ({ onGetStartedClick }) => {
       <div className={`actions ${menuOpen ? "open" : ""}`}>
         {userInfo?.token ? (
           <>
-            <Link to="/partner/dashboard" className="login-btn">
+            <Link to="/partner/dashboard" className="dashboard-clk">
               Dashboard
             </Link>
-            <button className="login-btn" onClick={onGetStartedClick}>
+            {/* <button onClick={onGetStartedClick}>
               Get Started
-            </button>
-            <button onClick={handleSignOut} className="login-btn">
+            </button> */}
+            <button onClick={handleSignOut} className="log-btn">
               Sign Out
             </button>
           </>
         ) : (
-          <Link to="/login" className="login-btn">
+          <Link to="/login" className="log-btn">
             <FaUser className="user-icon" /> Login
           </Link>
         )}
